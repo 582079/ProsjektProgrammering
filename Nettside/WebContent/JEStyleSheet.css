@@ -3,16 +3,21 @@
 body,html{margin:0; width:100%;}
 html{background-color:#ffffff;}
 
+.menu {background-color:black;width:100%} 
+.menu_element {height:40px;width:20%;padding: 10px 0px;background-color:black;text-align:center; float:left;}
+.menu_element a{color:white;text-decoration:none;}
+
 .container{
+	
 	padding:10px;
 	font-family:"Helvetica";
+	position:relative;
+	top:10px;
 }
 
 .container img{
 	
-	position:fixed;
-	right:10px;
-	top:10px;
+	float:right;
 	
 }
 
