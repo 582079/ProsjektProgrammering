@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Variabler</title>
+<link rel="stylesheet" href="JavaCodeStyle.css">
+</head>
+<body>
+	<div class="menu">
+  		<div class="menu_element"><a href="../Forside.html">Forsiden</a></div>
+  		<div class="menu_element"><a href="#anja">Anja</a></div>
+  		<div class="menu_element"><a href="#espen">Espen</a></div>
+  		<div class="menu_element"><a href="#erlend">Erlend</a></div>
+  		<div class="menu_element"><a href="../JanErik.html">Jan Erik</a></div>
+	</div>
+	<div class=container>
+		<h1>Variabler</h1>
+		<p>For å utvite Hello World kan vi bruke noe som kalles en variabel.<br>
+			Variabler er navnt som inneholder forskjellige typer verdier, som tall, tekst, sannhet.<br>
+			Til å begynne med kan vi bruke noe som kalles en String.<br>
+			"String" inne holder tekst og vi kan gi en String til metoden System.out.println() istedenfor teksten i seg selv.<br>
+			Vi deklarerer(lager) en String variabel slik:<br></p>
+		<div class=code><pre>String helloWorldTekst;</pre></div>
+		<p>Her er String typen og helloWorldTekst navnet til variabelen.<br>
+			Vi bruker også ikke stor bokstav for det første ordet i navnet, dette er bare slik det vanligvis blir gjort.<br>
+			Vi kan også gi String en verdi, slik:<br></p>
+		<div class=code><pre>helloWorldTekst = "Hello World!";</pre></div>
+		<p>Nå inneholder denne variabelen helloWorldTekst akkuratt den samme teksten som vi ga til System.out.println() i det siste eksempelet.<br>
+			Vi kan også gjøre alt dette i samme linje:</p>
+		<div class=code><pre>String helloWorldTekst = "Hello World!";</pre></div>
+		<p>Vi kan sette denne linjen inn i HelloWorld slik som dette:</p>
+		<div class=code><pre>
+package pakke;
+
+public class HelloWorld { 
+
+	public static void main(String[] args) {
+	
+		String helloWorldTekst = "Hello World!";
+		
+		System.out.println("Hello World!");
+
+	}
+
+}</pre></div>
+		<p>Nå lager vi en variabel og gir den en verdi, men den blir framdeles ikke brukt.<br>
+			For å gjøre dette må vi gi helloWorldTekst som et parameter til System.out.println() slik som dette:</p>
+		<div class=code><pre>System.out.println(helloWorldTekst);</pre></div>
+		<p>Du har kanskje lagt merke til at vi ikke bruker hermetegn rundt helloWorldTekst her.<br>
+			Det er siden det er en String(tekst) variabel som refererer til en verdi som allerede har hermetegn rundt seg.<br><br>
+
+			Når vi har oppdatert den linjen vil det se slik ut:</p>
+			<div class=code><pre>
+package pakke;
+
+public class HelloWorld { 
+
+	public static void main(String[] args) {
+	
+		String helloWorldTekst = "Hello World!";
+		
+		System.out.println(helloWorldTekst);
+
+	}
+
+}</pre></div>
+		<p>Hvis du kjører dette igjen burde du få samme resultat som sist gang.<br>
+			Dette er ikke veldig spennende, men variabler er veldig praktiske.<br>
+			De kan holde på en verdi som blir brukt mange ganger, og du vil bare trenge å endre verdien på et sted for at alt som bruker verdien vil bruke den nye verdien.<br>
+			Det er også viktig å huske hvorfor det heter en variabel, du kan endre verdien.<br>
+			Etter du har skrevet ut teksten i helloWorldTekst kan du gi helloWorldTekst en ny verdi og skrive ut en ny linje.<br>
+			Slik som dette:</p>
+			<div class=code><pre>
+package pakke;
+
+public class HelloWorld { 
+
+	public static void main(String[] args) {
+	
+		String helloWorldTekst = "Hello World!";
+		
+		System.out.println(helloWorldTekst);
+		
+		helloWorldTekst = "Bye World!";
+		
+		System.out.println(helloWorldTekst);
+
+	}
+
+}</pre></div>
+	</div>
+	<div class="bottom_menu">
+  		<div class="bottom_menu_element"><a href="#forrige_java_eksempel">Forrige Eksempel</a></div>
+  		<div class="bottom_menu_element"><a href="#alle_java_eksempler">Alle Eksempler</a></div>
+  		<div class="bottom_menu_element"><a href="#neste_java_eksempel">Neste Eksempel</a></div>
+	</div>
+</body>
+</html>
