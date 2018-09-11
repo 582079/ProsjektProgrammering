@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Introduksjon</title>
+<link rel="stylesheet" href="JavaCodeStyle.css">
+</head>
+<body>
+	<div class="menu">
+  		<div class="menu_element"><a href="Forside.html">Forsiden</a></div>
+  		<div class="menu_element"><a href="#anja">Anja</a></div>
+  		<div class="menu_element"><a href="#espen">Espen</a></div>
+  		<div class="menu_element"><a href="#erlend">Erlend</a></div>
+  		<div class="menu_element"><a href="JanErik.html">Jan Erik</a></div>
+	</div>
+	<div class=container>
+		<h1>Introduksjon</h1>
+		<p>	Til å begynne med trenger du en IDE(Integrated Developer Enviorment) som støtter Java.<br>
+ 			Mens du kan skrive, pakke sammen, og kjøre programmer uten en, er det mest praktisk å ha en IDE siden det sammler alt.<br>
+			Eclipse vil bli brukt til å lage eksemplene her, så det vil være lettere om du bruker det.<br>
+ 
+			Når du åpner opp Eclipse kan du velge et "workspace".<br>
+			Dette er arbeidsområdet ditt, hvor prosjektene dine vil bli lagret.<br>
+			Med mindre du har lyst til å lagre de et spsielt sted kan du bare fortsette.<br>
+ 
+			Når du er inne i IDE-programmet ditt, kan du starte ditt første prosjekt.<br>
+ 			I Eclipse gjør du dette ved å klikke på File>New>Java Project.<br>
+ 			Gi prosjektnavnet "HelloWorld" denne gangen og klikk "Finish".<br>
+ 			Du vil nå ha en mappe til venstre, prosjektet ditt.<br>
+ 
+ 			Velg prosjektet ditt, klikk på File>New>Package.<br>
+ 			Vi kan kalle den "Pakke" for klarhet.<br>
+ 			Nå går vi en siste gang opp i menyen, klikk på File>New>Class.<br>
+ 			Her skal du gi et navn, vi velger "HelloWorld", som med prosjektnavnet.<br>
+ 			Før du velger finish burde du klikke boksen for "public static void main(String[] args)"<br>
+ 			Akuratt hva det betyr er ikke så viktig nå.<br>
+ 		</p>
+ 		<div class=code><pre>
+package nettside;
+
+public class HelloWorld { 
+
+	public static void main(String[] args) {
+
+	}
+
+}</pre>
+ 		</div>
+ 		<p>
+ 			Nå vil du ha begynnelsen, det såkalte skjellettet, av ditt første prosjekt.<br>
+ 			Du vil se pakken som du lagde på toppen, så vil du se klassen du lagde etter det.<br>
+ 			Klassen har en krøllparantes({) på slutten av linjen.<br>
+ 
+ 			Hvis du klikker på denne vil Eclipse lage en boks rundt en annen krøllparantes(}) helt på bunnen.<br>
+ 			Det Eclipse prøver å si er at de hører sammen. <br>
+ 			Dette er fordi all teksten mellom disse to krøllparantesene er en del av klassen vi lagde, "HelloWorld".<br>
+ 			Der inne ser vi også innholdet til boksen vi valgte når vi lagde klassen.<br>
+ 			Dette kalles en metode. <br>
+ 			Den har også krøllparanteser, det er innenfor disse krøllparantesene vi skal begynne å skrive kode.<br>
+ 		</p>
+ 		<p>
+ 			Nå heter dette programmet "HelloWorld", og det er nettopp det vi skal få programmet til å si.<br>
+ 			Mellom krølleparantesene til "main" metoden skriver vi: System.out.println("Hello World!");<br>
+ 			Press CTRL + S for å lagre programmet og klikk Run>Run eller press CTRL + F11 for å kjøre programmet.<br>
+ 			Om programmet fungerte nå burde det ha printet en linje i en konsoll fane, gratulerer!<br>
+ 			Om det ikke fungerte må du sjekke at alt er skrevet riktig.<br>
+ 			Java godtar ingen skrivefeil, og man må bli vant til å lete etter skrivefeil.<br>
+ 		</p>
+ 		<div class=code><pre>
+package nettside;
+
+public class HelloWorld { 
+
+	public static void main(String[] args) {
+		
+		System.out.println("Hello World!");
+
+	}
+
+}</pre>
+ 		</div>
+ 			<h4>Hva skjer i Hello World?</h4>
+ 		<p>
+ 			Hva betyr dette: System.out.println("Hello World!");<br>
+ 		</p>
+ 		<p>
+ 			Når vi sier println(kort for "print line") refererer vi til en metode, slik som den vi skrev i nå(main).<br>
+ 			Vi ser ikke println i denne filen siden det er en del av noe annet, det er en del av System.out.<br>
+ 			Tenk på det som å finne fram en fil. Vi sier ikke bare hva vi vil ha, vi sier også i hvilke mappe filen er.<br>
+ 			Dette er noe man kaller et bibliotek.<br>
+ 		</p>
+ 		<p>
+ 			Vi sier også ("Hello World") eller println.<br>
+ 			Dette er informasjonen vi vil at metoden println skal jobbe med, og kalles et aktuelt parameter.<br>
+ 			Vi bruker hermetegn for å forklare til println at Hello World! skal behandles som tekst.<br>
+ 			Hvorfor det er nødvendig vil du forstå litt senere.<br>
+ 		</p>
+ 		<p>
+ 			Så kommer vi til den siste delen, semikolon(;)<br>
+ 			Semikolon er et slags punktum for hver linje(bortsett fra rett etter krøllparanteser).<br>
+ 			Maskinen bryr seg ikke om nye linjer, bare semikolon og mellomrom slik at alt ikke henger sammen.<br>
+ 		</p>
+ 		<p>
+ 			Kort fortalt kaller vi System.out.println(), gir tekst som et parameter, og merker slutten av linjen.<br>
+		</p>
+	</div>
+</body>
+</html>
