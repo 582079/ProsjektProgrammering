@@ -5,6 +5,16 @@
 	padding:10px;
 	
 }
+.img_container {
+    position: relative;
+}
+
+.bildetekst {
+    position: absolute;
+    bottom: -26px;
+    left: 16px;
+    font-size: 18px;
+}
 
 .container img {
 	
