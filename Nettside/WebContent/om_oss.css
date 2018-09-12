@@ -3,6 +3,8 @@
 .container {
 	
 	padding:10px;
+	top:10px;
+	position:relative;
 	
 }
 .img_container {
@@ -32,5 +34,12 @@
 
 .container .text_field {
 	font-family:"Helvetica";
+	
+}
+
+h1 {
+	
+	text-shadow: 1px 1px 2px #000000;
+	color:#444;
 	
 }
