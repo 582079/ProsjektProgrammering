@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head lang="nb">
+<meta charset="utf-8">
+<title>Enkel Interaksjon</title>
+<link rel="stylesheet" href="JavaCodeStyle.css">
+</head>
+<body>
+	<div class="menu">
+  		<div class="menu_element"><a href="../om_oss.html">Forsiden</a></div>
+  		<div class="menu_element"><a href="../Anja.html">Anja</a></div>
+  		<div class="menu_element"><a href="../Espen.html">Espen</a></div>
+  		<div class="menu_element"><a href="../Erlend.html">Erlend</a></div>
+  		<div class="menu_element"><a href="../JanErik.html">Jan Erik</a></div>
+	</div>
+	<div class=container>
+		<h1>Enkel Interaksjon</h1>
+		<p> Med et bibliotek som heter JOptionPane kan vi lage enkel interaksjon mellom en bruker og programmet.<br>
+			Etter vi har laget et skjellet, den grunnleggende koden, må vi importere JOptionPane.<br>
+			Dette gjør vi ved å skrive dette etter package linjen:</p>
+		<div class=code><pre>
+import static javax.swing.JOptionPane.*;
+</pre></div>
+		<p>
+			Da vil vi ha dette:
+		</p>
+		<div class=code><pre>
+package pakke;
+
+import static javax.swing.JOptionPane.*;
+
+public class HelloWorld { 
+
+	public static void main(String[] args) {
+
+	}
+
+}
+</pre></div>
+		<p>
+			Dette gjør at vi kan bruke alle metodene i biblioteket JOptionPane.<br>
+			Og dette kan vi bruke til å lage en ny verisjon av HelloWorld, som inkluderer navnet til brukeren.<br>
+			Den første metoden fra JOptionPane vi vil bruke da er showInputDialog().<br>
+			showInputDialog() tar en melding til brukeren(en String) som parameter.<br>
+			Verdien som showInputDialog returnerer er også en String verdi.<br>
+			Det vil si at vi kan sette en String til å være lik en showInputDialog().<br>
+			Da vil Java kj?re denne metoden n?r den skal gi en verdi til variabelen.<br>
+			Vi gjør dette i main metoden, slik som dette: </p>
+			<div class=code><pre>
+String navnTxt = showInputDialog("Gi et navn");
+</pre></div>
+		<p>
+			Hvis du kjører programmet nå burde det komme opp et lite vindu.<br>
+			Vinduet sier det du skrev inn som parameter, og returnerer teksten du skriver inn når du klikker "OK".<br>
+			Da vil navnTxt bli gitt denne verdien.</p>
+		<p>
+			Nå sier ikke programmet noe etter du har gitt et navn.<br>
+			Vi kunne ha fikset dette med System.out.println(), men vi skal bruke en til metode fra JOptionPane.<br>
+			showMessageDialog() lar deg gi en melding til en bruker.<br>
+			Hvorfor skal vi bruke dette istedenfor System.out.println()?<br>
+			Vi bruker showMessageDialog() siden en bruker kan se meldingen.<br>
+			Før vi setter inn noe er det viktig å vite at showInputDialog trenger to parametre.<br>
+			Parametere er separert med komma og må alltid være av riktig type og i riktig rekkefølge.<br>
+			Som det første parameteret for showMessageDialog vil vi gi verdien null.<br>
+			Dette er en spesiel tom variabel som betyr at det ikke er noen verdi, det er ikke det samme som et tall 0.<br>
+			Vi bruker et komma som en separator og gir en String verdi.<br>
+			Nå begynner vi med "Hello, ", men dette sier ikke noe navn.<br>
+			Etter det høyre hermetegnet skriver vi et plusstegn og navnTxt for inneholdet i den variabelen.<br>
+			Etter vi har endet linjen vil den se slik ut:</p>
+			<div class=code><pre>
+showMessageDialog(null, "Hello, " + navnTxt);
+</pre></div>
+		<p>
+			Nå ser det litt rart ut i det andre parameteret.<br>
+			Vi skriver et mellomrom etter komma siden det ikke er noen andre mellomrom.<br>
+			Plusstegnet legger sammen tekst hvis du gir skriver en String verdi, som parameteret er.<br>
+			Plusstegnet legger ikke til noe mellomrom, og vil behandle tall som ren tekst.<br>
+			Dette vil si at 2 + 5 i en String vil gi verdien 25, ikke 7, med mindre du skriver (2 + 7).<br>
+			Variabeler, som navnTxt, skal vi som sagt ikke legge hermetegn rundt,<br>
+			siden det er et navn som refererer til en verdi med hermetegn inkludert.<br><br>
+
+			Nå burde programmet se slik ut:</p>
+		<div class=code><pre>
+package pakke;
+
+import static javax.swing.JOptionPane.*;
+
+public class HelloWorld { 
+
+	public static void main(String[] args) {
+	
+		String navnTxt = showInputDialog("Gi et navn");
+		showMessageDialog(null, "Hello, " + navnTxt);
+
+	}
+
+}
+</pre></div>
+			<p>Hvis du kjører programmet nå, burde det spør det om navn og hilse deg.</p>
+	</div>
+	<div class="bottom_menu">
+  		<div class="bottom_menu_element"><a href="#forrige_java_eksempel">Forrige Eksempel</a></div>
+  		<div class="bottom_menu_element"><a href="#alle_java_eksempler">Alle Eksempler</a></div>
+  		<div class="bottom_menu_element"><a href="#neste_java_eksempel">Neste Eksempel</a></div>
+	</div>
+</body>
+</html>

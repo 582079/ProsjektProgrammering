@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head lang="nb">
+<meta charset="utf-8">
+<title>If</title>
+<link rel="stylesheet" href="JavaCodeStyle.css">
+</head>
+<body>
+	<div class="menu">
+  		<div class="menu_element"><a href="../om_oss.html">Forsiden</a></div>
+  		<div class="menu_element"><a href="../Anja.html">Anja</a></div>
+  		<div class="menu_element"><a href="../Espen.html">Espen</a></div>
+  		<div class="menu_element"><a href="../Erlend.html">Erlend</a></div>
+  		<div class="menu_element"><a href="../JanErik.html">Jan Erik</a></div>
+	</div>
+	<div class=container>
+		<h1>If</h1>
+		<p>Til nå har vi laget programmer som følger de samme instruksjonene hver gang.<br>
+			Programmet som leser inn et navn, og bruker det kan få forskjellig informasjon, men det vil alltid bruke det på samme måte.<br>
+			Hvis vi ser på noe annet, som innlogging, vet vi at det er tilfeller hvor vi må handle forskjellig basert på forskjellige resultater.<br>
+			Dette gjør vi med if. Som et eksempel kan vi lage et system hvor du skal gjette et tall.<br>
+			La oss lage et skjellet, importere JOptionPane og lese inn en verdi vi kaller tallTxt:</p>
+<div class=code><pre>
+package pakke;
+
+import static javax.swing.JOptionPane.*;
+
+public class GjettTall { 
+
+	public static void main(String[] args) {
+	
+		String tallTxt = showInputDialog("Gjett tallet:");
+		
+	}
+
+}</pre></div>
+		<p>Nå er det vi vil ha et tall, så vi bruker en int(heltall) variabel og en metode som kalles parseInt().<br>
+			parseInt() tar inn en String og returnerer en int verdi.<br>
+			Først må vi importere biblioteket som inneholder parseInt() ved å skrive:</p>
+<div class=code><pre>
+import static java.lang.Interger.*;
+</pre></div>
+		<p>Deretter lager vi en ny int. Den skal bli gitt verdien som parseInt(tallTxt) returnerer, selve tallet i String-verdien:</p>	
+<div class=code><pre>
+int tall = parseInt(tallTxt);
+</pre></div>
+		<p>Dersom du det er oversiktlig nokk for deg kan du også forkorte tallTxt og tall til:</p>
+<div class=code><pre>
+int tall = parseInt(showInputDialog("Gjett tallet:"));
+</pre></div>
+		<p>Vi vil lage en int hemmeligTall med et tilfeldig tall som skal gjettes.<br>
+			Hvordan vil vi vite om vi gjettet det riktige tallet?<br>
+			Vi vil bruke if for å sjekke dette.<br>
+			Vi starter med å skrive dette i main metoden:</p>
+<div class=code><pre>
+if(tallTxt == hemmeligTall){
+
+}
+</pre></div>
+		<p>Så, hva betyr dette? Vi starter med "if".<br>
+			"if" spør om noe skjer, og hvis det skjer vil koden mellom krøllparentesene til if bli utført.<br>
+			Her spør vi om tallTxt == hemmeligTall, men hvorfor bruker vi to er-lik-tegn?<br>
+			Grunnen til at vi gjør det er at vi skiller mellom deklarasjon og sammenligning.<br>
+			Vi sier ikke at tallTxt er lik hemmeligTall, vi spør om tallTxt er lik hemmeligTall.<br>
+			Nå sier vi hva som skal skjer om vi gjetter riktig.<br>
+			Mellom parentesene til if kan vi bare skrive en kort tilbakemelding med showMessageDialog():</p>
+<div class=code><pre>
+if(tallTxt == hemmeligTall){
+
+	showMessageDialog(null, "Du gjettet rett!");
+
+}
+</pre></div>
+		<p>Programmet burde se omtrent slik ut nå:</p>
+<div class=code><pre>
+package pakke;
+
+import static javax.swing.JOptionPane.*;
+import static java.lang.Integer.*;
+
+public class GjettTall { 
+
+	public static void main(String[] args) {
+	
+		String tallTxt = showInputDialog("Gjett tallet:");
+		int tall = parseInt(tallTxt);
+		int hemmeligTall = 59;
+		
+		if(tall == hemmeligTall){
+
+			showMessageDialog(null, "Du gjettet rett!");
+
+		}
+		
+	}
+
+}
+</pre></div>
+		<p>Hvis du kjører dette programmet vil et riktig resultat bli anerkjent, mens et feil resultat vil bli ignorert.<br>
+			Det er her "else if" kommer inn. Vi kan skrive en liten "else if" som spør tallet er større enn det hemmelige tallet.<br>
+			Denne burde komme etter slutten av if, dvs. etter høyre krøllparentes.</p>
+<div class=code><pre>
+else if(tall &gt hemmeligTall){
+
+	showMessageDialog(null, "tallet du gjettet er for stort");
+
+}
+</pre></div>
+		<p>Her ser vi at den er ganske lik den vanlige if.<br>
+			Vi bruker større enn tegnet for å teste om tall er større enn hemmeligTall.<br>
+			Med denne blokken vil brukeren vite om tallet er for stort.<br>
+			Vi kan også lage en til en ny "else if" for å se om tallet er mindre enn hemmeligTall.<br>
+			Denne setter vi igjen etter slutten av den forrige "else if":</p>
+<div class=code><pre>
+else if (tall &lt hemmeligTall) {
+
+	showMessageDialog(null, "Tallet du gjettet er for lite");
+	
+}
+</pre></div>
+		<p>Nå vil du ha et program som lar deg gjette et tall og gir tilbakemelding om det enten er for rett, for stort eller for lite.<br>
+			Istedenfor de to "else if" kunne du også brukt else.<br>
+			else sier bare hva som skal skje i alle andre tilfeller, og skrives etter alle if og "else if" for å dekke resten av tilfellene.</p>
+	</div>
+	<div class="bottom_menu">
+  		<div class="bottom_menu_element"><a href="#forrige_java_eksempel">Forrige Eksempel</a></div>
+  		<div class="bottom_menu_element"><a href="#alle_java_eksempler">Alle Eksempler</a></div>
+  		<div class="bottom_menu_element"><a href="#neste_java_eksempel">Neste Eksempel</a></div>
+	</div>
+</body>
+</html>

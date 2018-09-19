@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="nb">
+<meta charset="utf-8">
+<title>For-løkker</title>
+<link rel="stylesheet" href="JavaCodeStyle.css">
+</head>
+<body>
+	<div class="menu">
+  		<div class="menu_element"><a href="../om_oss.html">Forsiden</a></div>
+  		<div class="menu_element"><a href="../Anja.html">Anja</a></div>
+  		<div class="menu_element"><a href="../Espen.html">Espen</a></div>
+  		<div class="menu_element"><a href="../Erlend.html">Erlend</a></div>
+  		<div class="menu_element"><a href="../JanErik.html">Jan Erik</a></div>
+	</div>
+	<div class=container>
+		<h1>For-løkker</h1>
+		<p>En for-løkke er en løkke som vil gå gjennom en blokk med kode et vist antall ganger.<br>
+			Dette antallet blir bestemt av, og knyttet til en tellerverdi, vanligvis kalt "i".<br>
+
+			La oss si at vi vil lage et program som skriver et antall tegn.<br>
+			Vi kan jo skrive alle tegnene, men hva om vi vil ha et veldig høyt antall?<br>
+			Hva om vi vil endre tegnet vi skriver ut?<br>
+			Her kan vi bruke en for-løkke. La oss lage et enkelt skjellet. Du burde generelt unngå å bruke æ, ø, eller å i koden din.</p>
+<div class=code><pre>
+package pakke;
+
+public class ForLokke { 
+
+	public static void main(String[] args) {
+		
+	}
+
+}</pre></div>
+		<p>Denne gangen vil vi bruke en ny variabel, char. char står for et enkelt tegn, og gis en verdi slik:</p>
+
+<div class=code><pre>char tegn = '@';</pre></div>
+
+		<p>Merk at vi ikke bruker et vanlig hermetegn her.<br>
+			char vil ikke kunne bruke flere tegn slik som String, men vil også bruke mindre plass og dermed være mer effektiv.<br>
+			Vi kan bruke denne char verdien tegn i eksempelet vårt.<br>
+			Vi vil også gi et annet antall, antall ganger vi vil at tegnet vårt skal skrives ut.<br><br>
+
+			Denne gangen skal vi bruke en int, siden det er et heltall.</p>
+<div class=code><pre>
+int antallTegn = 7;
+</pre></div>
+		<p>Nå kommer vi til den vanskeligere delen, løkken.</p>
+<div class=code><pre>
+for (int i = 1; i &lt= antallTegn; i++){
+
+}
+</pre></div>
+		<p>for-løkker bruker som sagt en tellerverdi, i, som vi deklarerer og gir verdi i første del av for-løkken. Dette vil bare skje en gang.<br>
+			Vi sier "i &lt= antallTegn", denne midterste delen fungerer som en if-løkke, og spør om i er mindre eller lik antallTegn.<br>
+			Om den midterste delen er sann går vi inn i løkken og utfører all koden den inneholder.<br>
+			Til slutt, etter koden i løkken er utført, vil vi gi si i++. Vi øker i med 1 siden vi gikk gjennom løkken.<br>
+			Etter dette vil vi gå tilbake til toppen av løkken og sjekke den midterste if-delen av løkken.<br>
+			Vi går gjennom koden en gang til hvis if-delen fortsatt er sann.<br>
+			Hvis vi hadde brukt denne løkken nå ville den ha gått gjennom innholdet 7 ganger.<br>
+			i settes først til 1, så går vi gjennom koden en gang, så legges det 1 til i, i er lik to.<br>
+			Når vi har gått gjennom løkken 6 ganger vil i være 7.<br>
+			Nå vil ikke i være mindre enn 7(verdien til antallTegn), men i er fortsatt lik antallTegn.<br>
+			Derfor vil vi gå gjennom løkken en gang til og, i blir øket til 8, og oppfyller ikke lenger if-delen av løkken.<br>
+			Da vil vi ikke gå inn i løkken igjen, men hoppe over den og fortsette med å utføre resten av koden.<br><br>
+
+			La oss skrive noe med løkken vi har satt opp nå.<br>
+			Vi skriver ut noen tegn med System.out.print() i for-løkken.<br>
+			System.out.print() fungerer som System.out.println(), bortsett fra at vi ikke starter en ny linje til slutt.</p>
+<div class=code><pre>
+System.out.print(tegn + " ");
+</pre></div>
+		<p>Hvis du kjører programmet nå burde du ha en linje med tegn med mellomrom.<br>
+			Du kan lett endre antallTegn eller tegnet du vil skrive.<br>
+			Du kan også ha løkker i løkker.<br>
+			Lag en ny int antallLinjer lik antall linjer du vil ha.<br>
+			Du lager en ny for-løkke hvor du bruker j(eller noe annet som ikke er i). if-delen skal spør om j er mindre eller lik antallLinjer.<br>
+			Vi putter så den forrige løkken mellom parentesene til den nye løkken.<br>
+			Vi kaller System.out.println() etter den innerste løkken er ferdig men før den ytterste løkken er ferdig, for å gå til neste linje.<br><br>
+
+			Hele løkken burde se slik ut:</p>
+<div class=code><pre>
+for (int j = 1; j &lt= antallLinjer; j++){
+
+	for (int i = 1; i &lt= antallTegn; i++){
+		
+		System.out.print(tegn + " ");
+		
+	}
+	
+	System.out.println();
+	
+}
+</pre></div>
+		<p>Hvis du kjører dette vil den tideliggere linjen bli skrevet flere ganger, like mange ganger som tallet antallLinjer.<br>
+			For hver gang vi går gjennom den ytterste løkken vil vi stoppe ved den innerste løkken og utføre den 7 ganger før vi fortsetter og går til neste linje.</p>
+	</div>
+	<div class="bottom_menu">
+  		<div class="bottom_menu_element"><a href="#forrige_java_eksempel">Forrige Eksempel</a></div>
+  		<div class="bottom_menu_element"><a href="#alle_java_eksempler">Alle Eksempler</a></div>
+  		<div class="bottom_menu_element"><a href="#neste_java_eksempel">Neste Eksempel</a></div>
+	</div>
+</body>
+</html>
