@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head lang="nb">
+<meta charset="utf-8">
+<title>DoWhile</title>
+<link rel="stylesheet" href="JavaCodeStyle.css">
+</head>
+<body>
+	<div class="menu">
+  		<div class="menu_element"><a href="../om_oss.html">Forsiden</a></div>
+  		<div class="menu_element"><a href="../Anja.html">Anja</a></div>
+  		<div class="menu_element"><a href="../Espen.html">Espen</a></div>
+  		<div class="menu_element"><a href="../Erlend.html">Erlend</a></div>
+  		<div class="menu_element"><a href="../JanErik.html">Jan Erik</a></div>
+	</div>
+	<div class=container>
+		<h1>DoWhile</h1>
+		<p>Dette blir et litt mer komplisert eksempel, men hvis du bare vil vite om selve løkken kommer den tidelig.<br>
+			Vi starter med et skjellet og importerer java.lang.Integer.* og javax.swing.JOptionPane.*.<br>
+			Vi skal veksle penger for et produkt verdt 200 kr.<br>
+			Det "do while"-løkken vil gjøre her er å sjekke om verdien gitt er gyldig.<br>
+			Først starter vi med noen variabler.</p>
+<div class=code><pre>
+int pris = 200;
+int antallKr;
+boolean gyldigAntall = false;
+int rest = 0; // Resten av vekslepengene
+int[] krEnheter = {1, 5, 10, 20, 50, 100, 200, 500, 1000};
+int[] antallEnheter = new int[krEnheter.length]; // Hvor mange av hver enhet
+</pre></div>
+
+		<p>Vi har pris og antall betalt. <br>
+			For å huske om vi har et gyldig antall betalt må vi ha en sannhetverdi gyldigAntall<br>
+			Til veksling har vi en rest, som holder orden på hvor mange av pengene som ikke er vekslet enda.<br>
+			Vi har tabeller som vi lar oss trekke penger fra rest med en løkke og liste opp antallet av hver enhet.<br><br>
+
+			Vi begynner med en tom "do while"-løkke:</p>
+<div class=code><pre>
+do {
+
+} while(!gyldigAntall)
+</pre></div>
+		<p>I motsetning til en vanlig while-løkke, står while og sannhetsverdien på slutten av parentesene.<br>
+			Dette er siden while sjekker om det er et gyldig antall etter vi har kjørt koden.<br>
+			Det vil si at vi alltid går gjennom løkken minst en gang.<br>
+			Vi er også interisserte i å sjekke om antallet er gyldig først etter vi har fått en verdi, hvis den er det er det ikke noe mer som vi trenger å spør etter.<br><br>
+
+			Vi gir antallKr en verdi som blir omgjort fra Stringen vi får fra showInputDialog().<br>
+			Vi gir også en melding som forklarer hvorfor brukeren må gi en ny verdi, om de skulle skrive en feil verdi først.</p>
+<div class=code><pre>
+antallKr = parseInt(showInputDialog("Gi et antall kr over " + pris + " kr: "));
+</pre></div>
+		<p>Nå sjekker vi om det er en gyldig verdi:</p>
+<div class=code><pre>
+if(antallKr &gt= pris) {
+				
+	gyldigAntall = true;
+				
+}
+</pre></div>
+		<p>Nå kommer vi tilbake til while-delen, som spør om den gitte verdien var gyldig.</p>
+<div class=code><pre>
+while(!gyldigAntall)
+</pre></div>
+		<p>Var den det, så går vi ut av løkken og fortsetter.<br>
+			Var den ikke gyldig, fortsetter "do while"-løkken.<br>
+			Det vil si at vi burde komme ut med en gyldig verdi etter hvert.<br><br>
+
+			Nå ser vi hvor mye vi hvor mange kr vi må gi tilbake.</p>
+<div class=code><pre>
+rest = antallKr - pris;
+</pre></div>
+		<p>Vi starter en for-løkke for å gå gjennom alle kroneenhetene og finne ut hvor mange av hver enhet vi skal gi.
+			Vi begynner med en tom for-løkke:</p>
+<div class=code><pre>
+for(int i = krEnheter.length-1; i&gt=0; i--) {
+
+}
+</pre></div>
+		<p>Merk to ting:<br>
+			Vi sier at indeksen er en mindre enn lengden. Dette er siden den høyeste indeksen i en tabell er en mindre enn lengden.<br>
+			Vi begynner også fra den høyeste indeksen og går ned null.<br>
+			Dette er siden vi vil veksle de største krone-enhetene først, ellers ville vi bare gi enkroninger.<br><br>
+
+			Vi spør om resten delt på den minste krone-enheten hittil er større enn null:</p>
+<div class=code><pre>
+if(rest / krEnheter[i] &gt 0) {
+
+}
+</pre></div>
+		<p>Husk at dette er heltallsdivisjon, så med mindre resten er større enn minst en ganger krone-enheten, vil dette ikke være sant.<br>
+			Hvis det er sant utfører vi denne koden:</p>
+<div class=code><pre>
+antallEnheter[i] = rest / krEnheter[i];
+rest = rest % krEnheter[i];
+</pre></div>
+		<p>Verdien i antallEnheter med samme indeks vil bli gitt denne heltalls-divisjonen, som er lik antallet av enheten.<br>
+			Verdien vi gir rest bruker et prosenttegn. Dette kalles "modulo" her, og gir resten hvis du deler den venstre siden på den høyre siden.<br><br>
+
+			Etter if, men innenfor for-løkken, skriver vi ut en linje som oppsummerer antallet av enheten vi jobber med.</p>
+<div class=code><pre>
+System.out.println("Antall " + krEnheter[i] + "kr : " + antallEnheter[i]);
+</pre></div>
+		<p>Nå burde det fungere og koden burde se omtrent slik ut:</p>
+<div class=code><pre>
+package pakke;
+
+import static java.lang.Integer.*;
+import static javax.swing.JOptionPane.*;
+
+public class DoWhile {
+
+	public static void main(String[] args) {
+		
+		int pris = 200;
+		int antallKr;
+		boolean gyldigAntall = false;
+		int rest = 0; // Resten av vekslepengene
+		int[] krEnheter = {1, 5, 10, 20, 50, 100, 200, 500, 1000};
+		int[] antallEnheter = new int[krEnheter.length]; // Hvor mange av hver enhet
+		
+		do {
+			
+			antallKr = parseInt(showInputDialog("Gi et antall kr over " + pris + " kr: "));
+			
+			if(antallKr &gt= pris) {
+				
+				gyldigAntall = true;
+				
+			}
+			
+		} while (!gyldigAntall);
+		
+		// Gi vekslepenger
+		rest = antallKr - pris;
+		// Gå gjennom krone-enheter, og begynn med å veksle de største
+		for(int i = krEnheter.length-1; i&gt=0; i--) {
+			
+			if(rest / krEnheter[i] &gt 0) {
+				
+				antallEnheter[i] = rest / krEnheter[i];
+				rest = rest % krEnheter[i];
+				
+			}
+			
+			System.out.println("Antall " + krEnheter[i] + "kr : " + antallEnheter[i]);
+			
+		}
+
+	}
+
+}
+</pre></div>
+	</div>
+	<div class="bottom_menu">
+  		<div class="bottom_menu_element"><a href="#forrige_java_eksempel">Forrige Eksempel</a></div>
+  		<div class="bottom_menu_element"><a href="#alle_java_eksempler">Alle Eksempler</a></div>
+  		<div class="bottom_menu_element"><a href="#neste_java_eksempel">Neste Eksempel</a></div>
+	</div>
+</body>
+</html>
