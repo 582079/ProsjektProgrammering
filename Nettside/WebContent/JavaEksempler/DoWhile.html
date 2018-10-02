@@ -52,7 +52,7 @@ antallKr = parseInt(showInputDialog("Gi et antall kr over " + pris + " kr: "));
 </pre></div>
 		<p>Nå sjekker vi om det er en gyldig verdi:</p>
 <div class=code><pre>
-if(antallKr &gt= pris) {
+if(antallKr &gt;= pris) {
 				
 	gyldigAntall = true;
 				
@@ -73,7 +73,7 @@ rest = antallKr - pris;
 		<p>Vi starter en for-løkke for å gå gjennom alle kroneenhetene og finne ut hvor mange av hver enhet vi skal gi.
 			Vi begynner med en tom for-løkke:</p>
 <div class=code><pre>
-for(int i = krEnheter.length-1; i&gt=0; i--) {
+for(int i = krEnheter.length-1; i&gt;=0; i--) {
 
 }
 </pre></div>
@@ -84,7 +84,7 @@ for(int i = krEnheter.length-1; i&gt=0; i--) {
 
 			Vi spør om resten delt på den minste krone-enheten hittil er større enn null:</p>
 <div class=code><pre>
-if(rest / krEnheter[i] &gt 0) {
+if(rest / krEnheter[i] &gt; 0) {
 
 }
 </pre></div>
@@ -123,7 +123,7 @@ public class DoWhile {
 			
 			antallKr = parseInt(showInputDialog("Gi et antall kr over " + pris + " kr: "));
 			
-			if(antallKr &gt= pris) {
+			if(antallKr &gt;= pris) {
 				
 				gyldigAntall = true;
 				
@@ -134,9 +134,9 @@ public class DoWhile {
 		// Gi vekslepenger
 		rest = antallKr - pris;
 		// Gå gjennom krone-enheter, og begynn med å veksle de største
-		for(int i = krEnheter.length-1; i&gt=0; i--) {
+		for(int i = krEnheter.length-1; i&gt;=0; i--) {
 			
-			if(rest / krEnheter[i] &gt 0) {
+			if(rest / krEnheter[i] &gt; 0) {
 				
 				antallEnheter[i] = rest / krEnheter[i];
 				rest = rest % krEnheter[i];

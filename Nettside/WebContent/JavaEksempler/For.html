@@ -47,12 +47,12 @@ int antallTegn = 7;
 </pre></div>
 		<p>Nå kommer vi til den vanskeligere delen, løkken.</p>
 <div class=code><pre>
-for (int i = 1; i &lt= antallTegn; i++){
+for (int i = 1; i &lt;= antallTegn; i++){
 
 }
 </pre></div>
 		<p>for-løkker bruker som sagt en tellerverdi, i, som vi deklarerer og gir verdi i første del av for-løkken. Dette vil bare skje en gang.<br>
-			Vi sier "i &lt= antallTegn", denne midterste delen fungerer som en if-løkke, og spør om i er mindre eller lik antallTegn.<br>
+			Vi sier "i &lt;= antallTegn", denne midterste delen fungerer som en if-løkke, og spør om i er mindre eller lik antallTegn.<br>
 			Om den midterste delen er sann går vi inn i løkken og utfører all koden den inneholder.<br>
 			Til slutt, etter koden i løkken er utført, vil vi gi si i++. Vi øker i med 1 siden vi gikk gjennom løkken.<br>
 			Etter dette vil vi gå tilbake til toppen av løkken og sjekke den midterste if-delen av løkken.<br>
@@ -80,9 +80,9 @@ System.out.print(tegn + " ");
 
 			Hele løkken burde se slik ut:</p>
 <div class=code><pre>
-for (int j = 1; j &lt= antallLinjer; j++){
+for (int j = 1; j &lt;= antallLinjer; j++){
 
-	for (int i = 1; i &lt= antallTegn; i++){
+	for (int i = 1; i &lt;= antallTegn; i++){
 		
 		System.out.print(tegn + " ");
 		
