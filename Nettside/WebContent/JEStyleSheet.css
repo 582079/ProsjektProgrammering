@@ -80,7 +80,7 @@ h3 {
 	border-collapse: collapse;
 	width:450px;
 	color:#222;
-	cellpadding:0px;
+	cell-padding:0px;
 }
 
 tr{
@@ -106,7 +106,7 @@ tr:nth-child(even){
 }
 td{
 	border-right: solid 1px #444444;
-	border-left: solid 1px #4444444; 
+	border-left: solid 1px #444444; 
 }
 td:first-of-type{
 	border-left:solid 0px;	
