@@ -54,7 +54,7 @@ html{
 	
 }
 
-h1, h2 {
+h1, h2, h3 {
 	
 	text-shadow: 1px 1px 2px #000000; 
 	
@@ -62,12 +62,16 @@ h1, h2 {
 
 
 h1 {
-	color:#444;
+	color:#444444;
 
 }
 
 h2 {
-	color:#444;
+	color:#444444;
+}
+
+h3 {
+	color:#444444;
 }
 
 .likerTabell{
@@ -84,8 +88,8 @@ tr{
 }
 
 th{
-	border-right: solid 1px #444;
-	border-left: solid 1px #444; 
+	border-right: solid 1px #444444;
+	border-left: solid 1px #444444; 
 }
 th:first-of-type{
 	border-left: solid 0px;
@@ -101,8 +105,8 @@ tr:nth-child(even){
 	background-color:#eee;
 }
 td{
-	border-right: solid 1px #444;
-	border-left: solid 1px #444; 
+	border-right: solid 1px #444444;
+	border-left: solid 1px #4444444; 
 }
 td:first-of-type{
 	border-left:solid 0px;	
