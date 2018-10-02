@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head lang="nb">
+<meta charset="utf-8">
+<title>Tabeller</title>
+<link rel="stylesheet" href="JavaCodeStyle.css">
+</head>
+<body>
+	<div class="menu">
+  		<div class="menu_element"><a href="../om_oss.html">Forsiden</a></div>
+  		<div class="menu_element"><a href="../Anja.html">Anja</a></div>
+  		<div class="menu_element"><a href="../Espen.html">Espen</a></div>
+  		<div class="menu_element"><a href="../Erlend.html">Erlend</a></div>
+  		<div class="menu_element"><a href="../JanErik.html">Jan Erik</a></div>
+	</div>
+	<div class=container>
+		<h1>Tabeller</h1>
+		<p>Til nå har vi brukt en StringBuilder som holder en lang liste av linjer, men hva hvis du vil holde på en liste med nummere, eller separerte String verdier.<br>
+			Det er her tabeller kommer inn. Vi skal lage et eksempel hvor vi bruker en tabell til å holde verdier vi skal ta gjennomsnittet av.<br>
+			Først starter vi med et skjellet. Vi trenger to variabler, en for tabellen og en for å holde gjennomsnittsverdien:</p>
+<div class=code><pre>
+int[] tab = {0, 23, 553, 23, 6, 8, 5};
+double sum = 0;
+</pre></div>
+		<p>Den øverste verdien her er tabellen.<br>
+			Vi ser det står int, men den har også en firkantparentes og flere verdier i en krøllparentes.<br>
+			Int står som vanlig for en type variabel, mens firkantparentesen sier at det er en tabell med flere int verdier.<br>
+			Krøllparentesen holder alle verdiene som skal inn i denne tabellen.<br>
+			Så har vi også verdien sum. Dette er en "double", den inneholder tall etter komma, i tillegg til større negative og positive verdier enn int.<br>
+			Dette passer bra for deling, som gjennomsnittsberegning krever, men kan vise flere plasser etter punktum(vi bruker ikke komma i programmering) enn ønsket.<br>
+			Vi kommer tilbake til dette senere.<br><br>
+
+			Nå går vi inn i en for-løkke, og det er en ny type, en forenklet type.</p>
+<div class=code><pre>
+for(int e:tab) {
+			
+	sum += e;
+			
+}
+</pre></div>
+		<p>Vi ser den er mye kortere enn vanlig, den har også en annen verdi, e.<br>
+			Verdien e her er ikke en indeksverdi, som i, men et element av tabellen tab.<br>
+			Det vil si at loopen går gjennom alle elementene i tabellen tab og behandler de som en variabel e.<br>
+			Disse variabelene sendes så til variabelen sum, som skal brukes til å ta gjennomsnitt.
+<div class=code><pre>
+sum = sum / tab.length;
+</pre></div>
+		<p>Det er viktig å huske at '/' vil utføre heltallsdivisjon og utelate rester med mindre du jobber med double verdier eller rene tall som skrives med et punktum.<br>
+			Her bruker vi en tabell-metode kalt length, den gir lengden på tabellen, hvor mange elementer den inneholder.<br>
+			Dette gjør det også lett å gå gjennom den med en vanlig for-løkke, om du må bruke en indeksverdi.<br><br>
+
+			Til slutt printer vi ut gjennomsnittet vi har fått med System.out.println():</p>
+<div class=code><pre>
+System.out.println("Gjennomsnittsverdien i tabellen tab er: " + sum);
+</pre></div>
+		<p>Dette vil gi mange tall etter komma, så vi kan bytte ut sum med en String metode som tar inn en tall-verdi, format.</p>
+<div class=code><pre>
+format("%1.2f", sum)
+</pre></div>
+		<p>(Husk å importere String)<br>
+			Her skjer det en del, men kort fortalt, står 1 for plass som sum får, test hva som skjer hvis du øker denne.<br>
+			2 står for tall etter punktum.<br><br>
+
+			Nå burde alt fungere og koden burde se omtrent slik ut:</p>
+<div class=code><pre>
+package pakke;
+
+import static java.lang.String.*;
+
+public class Tabeller {
+
+	public static void main(String[] args) {
+		
+		int[] tab = {0, 23, 553, 23, 6, 8, 5};
+		double sum = 0;
+		
+		for(int e:tab) {
+			
+			sum += e;
+			
+		}
+		
+		sum = sum / tab.length;
+		
+		System.out.println("Gjennomsnittsverdien i tabellen tab er: " + format("%1.2f", sum));
+		
+	}
+
+}
+</pre></div>
+		<p>Litt ekstra om tabeller:<br><br>
+
+			En tabell må vite hvor lang den skal være hvis du ikke gir alle verdiene med en gang:</p>
+<div class=code><pre>
+int[] tab = new tab[5];
+</pre></div>
+		<p>Tabeller har et indekssystem som lar deg referere til verdiene i tabellen.</p>
+<div class=code><pre>
+int[] tab = {0, 23, 553, 23, 6, 8, 5};
+
+System.out.print("Tredje verdi i tab: " + tab[2]);
+</pre></div>
+		<p>Dette vi printe dette: Tredje verdi i tab: 553<br><br>
+
+			Hvorfor skriver den 553 når vi ga indeksverdien 2?<br>
+			Dette er fordi det er naturlig for maskiner å begynne å telle fra null.<br>
+			Derfor vil 553 være på den tredje plassen, men ha indeksen 2.<br>
+			Hele tabellen vil også har lengden 7, men gå fra og med 0, til og med 6.<br>
+			Slike ting er viktig å huske når du bruker tabeller og løkker, og kan ofte gi feil.<br></p>
+	</div>
+	<div class="bottom_menu">
+  		<div class="bottom_menu_element"><a href="#forrige_java_eksempel">Forrige Eksempel</a></div>
+  		<div class="bottom_menu_element"><a href="#alle_java_eksempler">Alle Eksempler</a></div>
+  		<div class="bottom_menu_element"><a href="#neste_java_eksempel">Neste Eksempel</a></div>
+	</div>
+</body>
+</html>
