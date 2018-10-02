@@ -22,6 +22,36 @@ html{background-color:#ffffff;}
 	
 }
 
+.img_container {
+    position: relative;
+}
+
+.container_gruppebilde img {
+	
+	padding-top:10px;
+	padding-right:10px;
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+	width:50%;
+	height:50vh;
+	float:left;
+	
+}
+
+.bildetekst {
+    position: absolute;
+    top: 26px;
+    left: 16px;
+    font-size: 18px;
+    color: white;
+}
+
+.container_gruppebilde .text_field {
+	font-family:"Helvetica";
+	
+}
+
 h1, h2 {
 	
 	text-shadow: 1px 1px 2px #000000; 
