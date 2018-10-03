@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <title>Jan Erik</title>
 <link rel="stylesheet" href="JEStyleSheet.css">
+<!-- <script type="text/javascript" src="TabellJS.js"></script> -->
+<script src="jquery-3.3.1.js"></script>
 </head>
 <body>
 	<div class="menu">
@@ -18,21 +20,43 @@
 		<img src="Janerik.jpeg" width=250 height=300 alt="Jan Erik">
 	
 		<h2>Erfaring i programmering:</h2>
-
-		<table class="experienceTable">
-			<tr>
-				<th><p>Kjent med</p></th>
+		<table id="experienceTable">
+ 			<tr>
+ 				<th><p>Kjent med</p></th>
 				<th><p>Ny</p></th>
 			</tr>
-			<tr>
-				<td><p>ActionScript 3.0</p></td>
-				<td><p>Java</p></td>
-			</tr>
-			<tr>
-				<td><p>Markup språk som XML og HTML</p></td>
-				<td><p>CSS</p></td>
-			</tr>
 		</table>
+
+		<script>
+		$(document).ready(function(){
+			
+			$.ajax({
+				
+				type:"GET",
+				url:"Tabell.xml",
+				dataType:"xml",
+				success:function(xml){
+					
+					$(xml).find('row').each(function(){
+						
+						var experience = $(this).find('experienced').text();
+// 						var experience = $(this).attr('experience')
+						var _new = $(this).find('_new').text();
+						console.log("variables" + experience + _new)
+						$('<tr></tr>').html('<td>' +experience+ '</td><td>' +_new+ '</td').appendTo('#experienceTable');
+						
+					});
+					
+					
+				}
+					
+			})
+			
+			
+		});
+		
+		</script>
+		
 		<div class="paragrafer">
 			<strong>Opplevelse med språkene:</strong>
 			<p>ActionScript var det første programmeringsspråket jeg lærte.<br>
