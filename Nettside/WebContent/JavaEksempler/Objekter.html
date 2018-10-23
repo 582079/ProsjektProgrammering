@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head lang="nb">
+<meta charset="utf-8">
+<title>Objekter</title>
+<link rel="stylesheet" href="JavaCodeStyle.css">
+</head>
+<body>
+	<div class="menu">
+  		<div class="menu_element"><a href="../om_oss.html">Forsiden</a></div>
+  		<div class="menu_element"><a href="../Anja.html">Anja</a></div>
+  		<div class="menu_element"><a href="../Espen.html">Espen</a></div>
+  		<div class="menu_element"><a href="../Erlend.html">Erlend</a></div>
+  		<div class="menu_element"><a href="../JanErik.html">Jan Erik</a></div>
+	</div>
+	<div class=container>
+		<h1>Objekter</h1>
+		<p>Java er et objekt-orientert språk. Det finnes en type kalt Object, men det er ikke det i seg selv vi skal fokusere på.<br>
+			Vi skal fokusere på objekter man kan lage selv. Disse objektene vil arve egenskaper fra Object klassen. Det er også innebygde typer som er objekter, som f. eks. tabeller.<br>
+			Hva skal vi lagre i et objekt? Hva du kan lagre i et objekt er ganske fleksibelt. Det vil være en egen klasse, med egne variabler og metoder.<br>
+			Det vil si at de båre kan lagre mange forskjellige typer informasjon, i tillegg til at de kan gjøre mange forskjellige handlinger som vi selv kan definere.<br>
+			I dette eksempelet skal vi ha et objekt kalt nettside som holder på informasjon om en nettside og lar oss sammenligne slik informasjon mellom flere nettside objekter.<br>
+			Først lager vi et skjellet for en klasse vi kaller NettsideKlient. Denne vil lage nye Nettside objekter og bruke metodene til de objektene.<br>
+			Vi skal også lage en Nettside klasse i en annen fil, men denne vil ikke bruke en main metode. Vi trenger også ikke å gjøre klassen "public", og mer privat er generelt bedre, så vi benytter muligheten.</p>
+<div class=code><pre>
+class Nettside {
+
+}
+</pre></div>
+		<p>Inne i klassen vil vi ha noen variabler, disse skal brukes innenfor samme klasse, så vi lar de være private:</p>
+<div class=code><pre>
+private String navn;
+private String URL;
+private String ipAdresse;
+</pre></div>
+		<p>Dette er generel informasjon som hvert Nettside objekt vil inneholde.<br>
+			Nå bruker vi noe kalt en "kontruktør". Den må ha samme navn som klassen og lar deg ta inn parametere når en ny kopi av objektet lages.</p>
+<div class=code><pre>
+public Nettside(String _navn, String _URL, String _ipAdresse){
+		
+		navn = _navn;
+		URL = _URL;
+		ipAdresse = _ipAdresse;
+		
+}
+</pre></div>
+		<p>Her vil de private variablene bli satt til argumenter slik at vi kan lage nye objekter som øyblikkelig er meningsfulle.<br>
+			Vi kan også lage forskjellige versjoner av denne konstruktøren. Det vi gjør nå er å lage en versjon med null argumenter i tilfellet det ikke blir gitt.<br>
+			Dette vil da være standardverdiene:</p>
+<div class=code><pre>
+public Nettside() {
+
+		this("hjemme", "127.0.0.1", "127.0.0.1");
+		
+}
+</pre></div>
+		<p>Her bruker vi også this. "this" er det vi er i, som er Objektet nettside nå. Vi kaller den forrige konstruktøren som tar 3 paremetre og gir 3 standard parametre.<br>
+			Nå skal vi også generere noen metoder, set og get, for variablene vi har. Plasser den blinkende streken som viser hvor du er etter slutten av den siste konstruktøren.<br>
+			Det er her de genererte metodene vil bli plassert. Klikk på Source > Generate getters and setters i topp-baren. Velg alle variablene. Generer.<br><br>
+
+			Nå vil vi ha noen metoder som lar oss endre og lese private variabler utenfor klassen. Generelt vil du ha private variabler og åpne hull til endringer vi tillater med offentlige metoder.<br>
+			Metoder som bare brukes innenfor samme klasse skal også være private.<br><br>
+
+			La oss lage noen Nettside objekter i NettsideKlient for å teste disse metodene:</p>
+<div class=code><pre>
+Nettside youtube = new Nettside("YouTube", "https://www.youtube.com/", "172.217.21.174");
+Nettside wikipedia = new Nettside("Wikipedia", "https://www.wikipedia.org/", "91.198.174.192");
+Nettside w3schools = new Nettside("w3schools", "https://www.w3schools.com/", "192.229.133.221");
+</pre></div>
+		<p>Her er "new Nettside()" delen som gir parametre til kontruktøren.<br><br>
+
+			Du kan teste metodene ved å skrive f. eks:</p>
+<div class=code><pre>
+System.out.println(youtube.getNavn());
+</pre></div>
+		<p>For å printe ut innholdet i variabelen navn i Nettside objektet youtube.<br><br>
+
+			La oss lage noen sammenlignings metoder:</p>
+<div class=code><pre>
+public boolean likNavn(Nettside annenNettside) {
+		
+	if (annenNettside == null) {
+			
+		return false;
+			
+	} else if (this.navn == annenNettside.navn) {
+			
+		return true;
+			
+	} else {
+			
+		return false;
+			
+	}
+		
+}
+	
+public boolean likURL(Nettside annenNettside) {
+		
+	if (annenNettside == null) {
+			
+		return false;
+			
+	} else if (this.URL == annenNettside.URL) {
+			
+		return true;
+			
+	} else {
+			
+		return false;
+			
+	}
+		
+}
+	
+public boolean likIP(Nettside annenNettside) {
+		
+	if (annenNettside == null) {
+			
+		return false;
+			
+	} else if (this.ipAdresse == annenNettside.ipAdresse) {
+			
+		return true;
+			
+	} else {
+			
+		return false;
+			
+	}
+		
+}
+</pre></div>
+		<p>Her har vi en sjekk for andre objekter som er lik null siden det ville gitt en feil om vi behandlet de.<br>
+			Du har kanskje lagt merke til at vi ikke bruker en get-metode her for å få tak i variablene til det andre objektet som er paremetret.<br>
+			Dette går hvis paremetret er av samme type, det er sant for annenNettside siden den er av typen Nettside.<br><br>
+
+			Du kan kalle disse metodene fra NettsideKlient slik som dette:</p>
+<div class=code><pre>
+System.out.println(youtube.likURL(wikipedia));
+</pre></div>
+		<p>Dette vil printe ut sannhetverdien, som burde være false i dette tilfellet.<br><br>
+
+			Noe annet du også kan gjøre er å generere en toString() metode slik som med setters og getters.<br>
+			Hvis du gjør dette vil du også se at det begynner med:</p>
+<div class=code><pre>
+@Override
+</pre></div>
+		<p>Dette betyr at vi overskriver en metode som det allerede finnes. <br>
+			Dette vil gi en String som er en oppsummering av variablene i objektet.<br>
+			Du kan lage hvilke som helst andre metoder og variabler for dette objektet, det er det som gjør de så nyttige.</p>
+	</div>
+	<div class="bottom_menu">
+  		<div class="bottom_menu_element"><a href="#forrige_java_eksempel">Forrige Eksempel</a></div>
+  		<div class="bottom_menu_element"><a href="#alle_java_eksempler">Alle Eksempler</a></div>
+  		<div class="bottom_menu_element"><a href="#neste_java_eksempel">Neste Eksempel</a></div>
+	</div>
+</body>
+</html>

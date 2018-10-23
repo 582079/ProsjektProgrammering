@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="nb">
+<meta charset="utf-8">
+<title>Flerdimensjonelle Tabeller</title>
+<link rel="stylesheet" href="JavaCodeStyle.css">
+</head>
+<body>
+	<div class="menu">
+  		<div class="menu_element"><a href="../om_oss.html">Forsiden</a></div>
+  		<div class="menu_element"><a href="../Anja.html">Anja</a></div>
+  		<div class="menu_element"><a href="../Espen.html">Espen</a></div>
+  		<div class="menu_element"><a href="../Erlend.html">Erlend</a></div>
+  		<div class="menu_element"><a href="../JanErik.html">Jan Erik</a></div>
+	</div>
+	<div class=container>
+		<h1>Flerdimensjonelle Tabeller</h1>
+		<p>Tabeller kan ha flere dimensjoner, ikke bare en.<br>
+			Dette er lett gjort ved å legge til en ekstra firkantparentes.<br>
+			I dette eksempelet skal vi se hvordan du kunne bygd opp en enkel kalender som tar inn en time, dag og hendelse.<br>
+			Vi begynner med et enkelt skjellet og importerer javax.swing.JOptionPane.* og java.lang.Integer.*.<br>
+			Vi vil også lage en variabel i klassen, før main metoden, dette er slik at den skal være tilgjengelig for flere metoder:</p>
+<div class=code><pre>
+private static String[][] kalender = new String[31][24];
+</pre></div>
+		<p>"private" vil si at den er tilgjengelig innenfor klassen.<br>
+			"static" betyr at den bare skal brukes innenfor metoder som er "static".<br>
+			Som sagt betyr ekstra firkantparentes at vi har en ekstra dimensjon.<br>
+			Når vi setter lengden på tabellene trenger vi egentlig bare å sette lengden for den ytterste tabellen som<br>
+			holder på de andre tabellene. Dette ville da vært den lengst til venstre([31]).<br>
+			Det betyr at hvis vi hadde lyst, kunne vi satt forskjellige lengder på timetabellene([24]) i forskjellige indekser av dagtabellen([31]),<br>
+			men dette gir ikke mening her.<br><br>
+
+			Vi vil også lage en ny metode, lagHendelse():</p>
+<div class=code><pre>
+public static void lagHendelse() {
+
+}
+</pre></div>
+		<p>Først vil vi ha noe data å jobbe med:</p>
+<div class=code><pre>
+String[] utTxt = showInputDialog("Gi time/dag/hendelse med skråstrek").split("/");
+</pre></div>
+		<p>Vi spør om time/dag/hendelse, dette returnerer en String verdi som lar oss bruke String metoden split.<br>
+			Split returnerer en tabell av Stringer som ble delt opp med den valgte separatoren, i dette tilfellet "/".<br>
+			"/" vil ikke være inkludert i noen av strengene i tabellen.<br>
+			La oss sette noen variabler til verdiene i denne tabellen for å holde orden:</p>
+<div class=code><pre>
+int time = parseInt(utTxt[0]);
+int dag = parseInt(utTxt[1]);
+String hendelse = utTxt[2];
+</pre></div>
+		<p>Siden alle verdier er String må vi konvertere noen.<br>
+			Her er det også viktig å huske at forskjellen mellom lengder og indeks av tabeller.<br>
+			Timer vil faktisk passe siden vi har 24 timer og refererer til timene som time 0 til time 23.<br>
+			Dager må vi derimot justere når de brukes som indeks, siden vi begynner på 1 og går til lengden.<br>
+			La oss sette hendelsen inn i kalenderen med riktig indeks:</p>
+<div class=code><pre>
+kalender[dag - 1][time] = hendelse;
+</pre></div>
+		<p>Her spesifiserer vi både dag og time, hvis vi bare hadde spesifisert dag hadde vi referert til tabellen til den dagen istedenfor.<br>
+			Derfor kan man også sette tabellen kalender sin lengde uten å sette andre lengder, og lage de indre tabellene inni kalender i etterkant.<br>
+			Du kan tenke på dag og time indeksene litt som et grafisk koordinat, med x og y, og potensial for flere dimensjoner som z og w.<br>
+			Forskjellen er at størrelsen av tabellene har noe å si.<br>
+			Du vil ha de ytterste tabellindeksene, som peker til underordnede tabeller, lengre mot venstre.<br><br>
+
+			La oss skrive dette ut for å se om vi får rett resultat:</p>
+<div class=code><pre>
+System.out.println(kalender[dag-1][time] + " klokken 12 den 30.");
+</pre></div>
+		<p>kall metoden i main:</p>
+<div class=code><pre>
+lagHendelse();
+</pre></div>
+		<p>Kjør og gi:</p>
+<div class=code><pre>
+12/30/test
+</pre></div>
+		<p>I dette eksempelet kan man lett legge til flere dimensjoner som minutter, uker, måneder, år.<br>
+			Man kan også sette en start og slutt dato og fylle alle plasser mellom med en løkke for mer nøyanse.<br>
+			Noe som kunne vært praktisk hadde vært å lagre og hente denne kalendertabellen.<br>
+			Dette skal vi bruke til å utvide kalenderen i eksempelet for filbehandling.</p>
+	</div>
+	<div class="bottom_menu">
+  		<div class="bottom_menu_element"><a href="#forrige_java_eksempel">Forrige Eksempel</a></div>
+  		<div class="bottom_menu_element"><a href="#alle_java_eksempler">Alle Eksempler</a></div>
+  		<div class="bottom_menu_element"><a href="#neste_java_eksempel">Neste Eksempel</a></div>
+	</div>
+</body>
+</html>
