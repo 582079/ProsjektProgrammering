@@ -19,7 +19,7 @@
 
 .menu_element:hover {
 	
-	background-color:relative;
+	background-color:#000000;
 	animation-name:menu_hover_ani;
 	animation-duration:1s;
 	animation-iteration-count:infinite;
@@ -31,7 +31,7 @@
 }
 .example_square:hover {
 	
-	background-color:relative;
+	background-color:#000000;
 	animation-name:menu_hover_ani;
 	animation-duration:1s;
 	animation-iteration-count:infinite;
@@ -43,7 +43,7 @@
 }
 .bottom_menu_element:hover {
 	
-	background-color:relative;
+	background-color:#000000;
 	animation-name:menu_hover_ani;
 	animation-duration:1s;
 	animation-iteration-count:infinite;
