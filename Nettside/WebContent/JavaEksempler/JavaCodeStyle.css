@@ -41,6 +41,18 @@
 	animation-delay:1s;
 	
 }
+.bottom_menu_element:hover {
+	
+	backround-color:relative;
+	animation-name:menu_hover_ani;
+	animation-duration:1s;
+	animation-iteration-count:infinite;
+	animation-direction:alternate;
+	animation-timing-function:ease-out;
+	animation-fill-mode:both;
+	animation-delay:1s;
+	
+}
 
 .bottom_menu_element {
 	width:33.333333%;
@@ -49,11 +61,15 @@
 	text-align:center;
 	float:left;
 	margin-bottom:10px;
+	height:40px;
 }
 
 .bottom_menu_element a{
 	color:white;
 	text-decoration:none;
+	width:100%;
+	height:100%;
+	display:block;
 }
 
 .container{
@@ -122,6 +138,7 @@ h1 {
 	left:0;
 	z-index:10;
 	display:block;
+	line-height:125px;
 	
 }
 
