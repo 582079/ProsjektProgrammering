@@ -7,9 +7,9 @@
 	
 }
 
-.menu {background-color:black;width:100%} 
-.menu_element {height:40px;width:50%;padding:10px 0px;background-color:black;text-align:center; float:left;}
-.menu_element a{color:white;text-decoration:none;}
+.menu {background-color:black;width:100%;height:40px;} 
+.menu_element {height:100%;width:50%;padding:10px 0px;background-color:#000000;text-align:center; float:left;}
+.menu_element a{color:white;text-decoration:none;width:100%;height:100%;display:block;}
 
 .bottom_menu {
 	background-color:black;
@@ -29,7 +29,7 @@
 	animation-delay:1s;
 	
 }
-.bottom_menu_element:hover {
+.example_square:hover {
 	
 	backround-color:relative;
 	animation-name:menu_hover_ani;
@@ -60,7 +60,6 @@
 	
 	font-family:"Helvetica";
 	position:relative;
-	z-index:-1;
 	padding-top:10px;
 	padding-bottom:10px;
 	top:10px;
@@ -92,3 +91,39 @@ h1 {
 	text-shadow: 1px 1px 2px #000000; 
 	
 }
+
+.examples{
+	
+	display:grid;
+	grid-template-columns:1fr 1fr 1fr;
+	grid-gap:10px;
+	grid-auto-rows: minmax(150px,20vh);
+	width:100%;
+	
+}
+
+.example_square{
+	
+	width:100%;
+	padding:10px 0px;
+	background-color:black;
+	text-align:center; 
+	float:left;
+	
+}
+
+.example_square a{
+	
+	color:#FFFFFF;	
+	text-decoration:none;
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+	z-index:10;
+	display:block;
+	
+}
+
+
+
