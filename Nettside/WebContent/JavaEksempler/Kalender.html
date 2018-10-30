@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html>
+<head lang="nb">
+<meta charset="utf-8">
+<title>Filer</title>
+<link rel="stylesheet" href="JavaCodeStyle.css">
+</head>
+<body>
+	<div class="menu">
+  		<div class="menu_element"><a href="../om_oss.html">Om Oss</a></div>
+  		<div class="menu_element"><a href="JavaForside.html">Alle Eksempler</a></div>
+  		<div class="menu_element"><a href="../ProsjektBeskrivelse.html">Om Prosjektet</a></div>
+	</div>
+	<div class=container>
+		<h1>Filer</h1>
+		<p>I dette eksempelet skal vi lage en klientklasse og to klasser kalt "Kalender" og "Hendelse".<br>
+			Kalenderen skal behandle forskjellige hendelser og klientklassen skal kalle på kalenderens metoder.<br>
+			Vi begynner først med kalender:</p>
+<div class=code><pre>
+import java.util.ArrayList;
+import java.util.List;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.Scanner;
+</pre></div>
+		<p>Vi importerer en del mer enn tidligere denne gangen. Vi lager også en del flere variabler (og en konstant).</p>
+<div class=code><pre>
+private String deler;
+	
+private String filnavn;
+private File kalender;
+private FileWriter skaper;
+private BufferedWriter buffer;
+private PrintWriter settInn;
+private Scanner scanner;
+	
+private int AntLin;
+private final String verdiBes;
+private Hendelse[] kalTab;
+</pre></div>
+		<p>Her er det en del variabler, her er en kort forklaring på de forskjellige variablene.<br>
+			"deler" variabelen vil bli brukt til å dele opp innhold som blir gitt fra brukeren, slik at vi har brukbar data å jobbe med.<br>
+			Den neste blokken er for skriving og lesing av filer.<br>
+			Navn-variabelen gir filnavnet, File representerer en fil og kan også bli brukt til å lage en ny fil, den blir brukt av FileWriter slik at vi kan skrive noe til filen.<br>
+			FileWriter blir igjen brukt av BufferedWriter, hva vil det si? Det vil si at vi ikke egentlig skriver en og en ting.<br>
+			BufferedWriter bruker et "buffer", et slags midlertidig lager. Den lagrer mange linjer og skriver mer på en gang til harddisk eller SSD.<br>
+			Dette gjør vi siden mange små lagringsopperasjoner er veldig tungt for harddisker og SSDer, men helt vanlig og håndterbart for hurtigminne(RAM), som tar seg av midlertidig lagring for kjørende prosesser.<br>
+			PrintWriter er igjen basert på BufferedWriter og lar oss "printe", som med System.out.println(), til bufferet, og dermed til filen.<br>
+			Vi har også en Scanner. Den vil vi bruke til å lese inn linjene i begynnelsen.<br><br>
+
+			Så har vi også AntLin, vi vil ha flere linjer i filen enn AntLin, det vil egentlig telle antall hendelser.<br>
+			Vi har også en verdibeskrivelse, som bare fungerer som en liten huskelapp, og viser hvordan tiden er lagret hvis du åpner lagringsfilen.<br>
+			Så har vi kalTab. Tabellen kalTab vil holde på alle hendelsene fra det blir lest inn til det skrives tilbake til filen.<br><br>
+
+			Vi lager en konstruktør for å gi standardverdier:</p>
+<div class=code><pre>
+public Kalender(String filnavn) throws Exception {
+		
+		deler = "[^0-9a-zA-Z]+";
+		this.filnavn = filnavn;
+		kalender = new File(filnavn);
+		verdiBes = "år1:mnd1:dag1:time1:min1:år2:mnd2:dag2:time2:min2:Hendelse";
+		
+		lagFil();
+		kalTab = new Hendelse[AntLin + 1000];
+		
+		fyllTabell();
+		
+}
+</pre></div>
+		<p>På første linje vil du se at konstruktøren har "throws Exception".<br>
+			Dette må vi gjøre en del siden vi jobber med filer. Metodene vi kaller kan "kaste" en feil på oss.<br>
+
+			Vi gir også strengen deler en verdi. Den skal dele opp inndata fra brukeren.<br>
+			Uttrykket den er lik kalles "regex", eller "regular expression", og hjelper oss med å behandle tekst.<br>
+			Firkantparentesene inneholder en rekke av verdier, hva er disse verdiene?<br>
+			Først ser vi på ^ tegnet. Her, innenfor firkantparentesene, betyr det at vi vil ha det som ikke er til høyre.<br>
+			0-9, a-z, og A-Z er mengder av tegn som inneholder alle tallene fra og med x til og med y hvis vi har x-y.<br>
+			Til slutt har vi et plusstegn. Plusstegnet betyr &egrave;n eller mer av dette tilfellet. <br>
+			Dette gjør vi siden vi ikke vil få tomme strenger mellom noe som "&amp;/%(&amp;(/" hvis en bruker skriver det som en deler av verdier.<br>
+			I det tilfellet ville vi gått videre(+) til vi får noe som faktisk er et tall eller en bokstav.<br><br>
+
+			Vi skriver også "this.filnavn = filnavn". Dette vil si at filnavn-variabelen vi lagde tidligere skal være lik filnavn-variablen vi gir når vi kaller konstruktøren med 'new Kalender("navn.txt")', det aktuelle parameteret.<br>
+			Dette er fordi this.(variabelnavn) alltid vil referere til variabelen som var deklarert utenfor metodene i klassen, mens variabelnavnet alene vil referere til parametre eller variabler som ble deklarert i samme metode, om de finnes.<br>
+			En alternativ løsning er å gi et annet navn som parameter, som _filnavn, slik at filnavn = _filnavn.<br>
+			Vi har også verdiBes, huskelappen til filen, det er ikke en gang strengt talt nødvendig her, men du må justere noen andre verdier om du velger å ikke bruke det.<br><br>
+
+			Vi kaller også lagFil(), som vil få informasjon om hvor mange linjer med hendelser det er når den er ferdig, som den da setter AntLin til, vi vil snart se på denne metoden.<br>
+			Etter det gir vi kalTab en størrelse, antallet hendelser vi har fra før i tabellen pluss antallet vi eventuelt vil utvide med.<br>
+			Vi må gjøre dette siden vi ikke kan gjøre en tabell større uten videre, dette kunne eventuelt blitt gjort med en liste.<br>
+			Vi kaller så en metode som fyller tabellen, og den ser vi på etter vi ser på lagFil():</p>
+<div class=code><pre>
+private void lagFil() throws Exception {
+		
+	kalender.createNewFile();
+	scanner = new Scanner(kalender);
+	
+	if(!scanner.hasNextLine()) {
+		
+		try {
+			
+			skaper = new FileWriter(kalender);
+			buffer = new BufferedWriter(skaper);
+			settInn = new PrintWriter(buffer);
+			
+			settInn.println(0);
+			settInn.println(verdiBes);
+			
+		} finally {
+			
+			settInn.close();
+			
+		}
+		
+		AntLin = 0;
+		
+	} else {
+		
+		AntLin = scanner.nextInt();
+		scanner.nextLine();
+		scanner.nextLine();
+		
+	}
+	
+}
+</pre></div>
+		<p>Her har vi igjen "throws Exception". Vi trenger dette når vi jobber direkte med filene og vet at det kan kastes feil.<br>
+			"kalender" lager en ny fil. Den vil bruke filnavnet den har fått, men bare lage en ny fil om den ikke finnes fra før, altså vil metoden ikke skrive over tidligere filer.<br>
+			Vi gir først en verdi til Scanner, siden vi nå vet hva vi vil skanne fra.<br>
+			Vi spør om scanner ikke har neste linje, siden vi er på "nullte" linje spør vi praktisk talt om filen er tom.<br>
+			Her har vi noe som kalles "try", dette brukes til å prøve å gjøre noe, man kan bruke det til å prøve å rette opp en feil.<br>
+			Som jeg sa tidligere baserer skaper seg på en fil og de andre skriverene baserer seg videre på det.<br>
+			Vi bruker selve printeren, settInn, til å skrive antall linjer med hendelser(i dette tilfellet 0) til filen, og på neste linje skriver vi beskrivelsen.<br>
+			Når alt i "try" er gjort, vil "finally" delen kjøres. Her lukker vi filen. Grunnen til at vi gjør dette er at det å bruke en fil kan sperre andre programmer ute fra å bruke den filen.<br><br>
+
+			Vi setter AntLin, antall hendelser, til null, siden vi vet det ikke kan være noen hendelser i en ny fil.<br>
+			Ellers vil antall linjer med hendelser være den neste int verdien.<br>
+			Hver gang vi bruker en next(Int/Line/Boolean...osv.) metode i Scanner klassen leser variabelen den linjen og går til punktet etter den delen av filen.<br>
+			På grunn av dette skriver vi scanner.nextLine() to ganger for å hoppe over resten av linjen vi er på og den neste linjen(beskrivelse).<br><br>
+
+			Nå som filen har blitt laget eller scanneren er trukket fram til riktig linje, skal vi lage fyllTabell:</p>
+<div class=code><pre>
+private void fyllTabell() {
+		
+	for(int i = 0; i &lt; AntLin; i++) {
+			
+		kalTab[i] = new Hendelse(scanner.nextLine());
+		
+	}
+	
+}
+</pre></div>
+		<p>Her har vi en ganske enkel løkke. Vi er sikre på at vi ikke trenger det nå, men hvis man ikke vet antall linjer ville man ha gjort det annerledes.<br>
+			I det tilfellet ville man ha brukt en while-løkke med sannhetsverdien scanner.hasNextLine() for å unngå å bruke en linje som ikke finnes.<br><br>
+
+			Nå som vi er ferdige med konstruktøren og det den kaller vil vi lage en tom konstruktør som gir den andre en standard-verdi i tilfelle brukeren ikke gir noen parametre:</p>
+<div class=code><pre>
+public Kalender() throws Exception {
+		
+	this("kalender.txt");
+		
+}
+</pre></div>
+		<p>Når vi bruker "this" her, vil vi kalle den forrige konstruktøren på samme måte som Kalender("kalender.txt") fra en annen klasse.<br><br>
+
+			Nå har vi laget en fil og lest den inn i en tabell, men vi vil også kunne skrive det som skal bli en kalender tilbake til en fil, derfor lager vi en metode kalt lagre():</p>
+<div class=code><pre>
+public void lagre() throws Exception {
+		
+	try {
+			
+		skaper = new FileWriter(kalender);
+		buffer = new BufferedWriter(skaper);
+		settInn = new PrintWriter(buffer);
+	
+		settInn.println(AntLin);
+		settInn.println(verdiBes);
+		
+		for(int i = 0; i &lt; AntLin; i++) {
+		
+			settInn.println(kalTab[i].getLinje());
+			System.out.println("skrive en linje til fil");
+		
+		}
+		
+	} finally {
+		
+		settInn.close();
+		
+	}
+		
+}
+</pre></div>
+		<p>Igjen bruker vi throws Exception, try, og finally, for å jobbe med feil.<br>
+			Vi printer over selve filen uansett om den finnes fra før eller ikke.<br>
+			Man kan legge til linjer på slutten av filen ved å gi parameteret true for append variabelen til FileWriter etter File variabelen.<br>
+			Dette kunne gitt mening hvis vi ikke ville printet antall linjer, men nå skal vi stadig endre antall hendelser på første linje.<br><br>
+
+			Om du vil er det også lett å lage &egrave;n til alternativ lagre metode som lar deg lagre til en ny fil her:</p>
+<div class=code><pre>
+public void lagre(String filnavn) throws Exception {
+		
+	try {
+		
+		File nyFil = new File(filnavn);
+		skaper = new FileWriter(nyFil);
+		buffer = new BufferedWriter(skaper);
+		settInn = new PrintWriter(buffer);
+	
+		settInn.println(AntLin);
+		settInn.println(verdiBes);
+		
+		for(int i = 0; i &lt; AntLin; i++) {
+		
+			settInn.println(kalTab[i].getLinje());
+			System.out.println("skrive en linje til fil");
+		
+		}
+		
+	} finally {
+		
+		settInn.close();
+		
+	}
+	
+}
+</pre></div>
+		<p>Et likt metodenavn er helt akseptabelt så lenge de formelle parametrene er annerledes i antall eller type.<br><br>
+
+			Nå er det på tide å jobbe litt med Hendelse klassen, slik at vi kan legge noen verdier til kalenderen.<br>
+			Det burde ikke være nødvendig å importere noe her, men vi skal ihverfall ha noen variabler:</p>
+<div class=code><pre>
+private String linje;
+private String[] linTab;
+	
+private int[] staDat;
+private int[] sluDat;
+private String hendelse;
+
+private String deler;
+</pre></div>
+		<p>"linje" er en hel linje med all informasjonen som trengs, vi vil dele denne informasjonen opp med de andre variablene slik at vi lettere kan jobbe med de.<br>
+			Vi lager en konstruktør:</p>
+<div class=code><pre>
+public Hendelse(String linje){
+		
+	this.linje = linje;
+	staDat = new int[5];
+	sluDat = new int[5];
+	
+	deler = "[^0-9a-zA-Z]+";
+	
+	hentLinVer();
+	
+}
+</pre></div>
+		<p>Denne vil ta inn en linje med tekst som må være formatert på en veldig bestemt måte for å gi riktig resultat(se verdiBes).<br>
+			Etter hvert skal vi fikse dette i Kalender for å gi en mer naturlig måte å legge til hendelser på.<br>
+			staDat og sluDat er startdatoen og sluttdatoen til hendelsen, vi vil ha fem verdier i hver av dem(år, måned, dag, time, minutt).<br><br>
+
+			Vi vil plukke ut disse verdiene ved hjelp av regex-strengen deler.<br>
+			Dette gjøres i metoden hentLinVer():</p>
+<div class=code><pre>
+private void hentLinVer() {
+		
+	linTab = linje.split(deler, 11);
+		
+	for(int i = 0; i &lt;= 4; i++) {
+			
+		staDat[i] = Integer.parseInt(linTab[i]);
+			
+	}
+		
+	for(int i = 0; i &lt;= 4; i++) {
+			
+		sluDat[i] = Integer.parseInt(linTab[i + 5]);
+			
+	}
+		
+	hendelse = linTab[linTab.length - 1];
+		
+}
+</pre></div>
+		<p>Slik som lagFil() og fyllTabell() er metoden privat siden den ikke skal kalles av andre klasser enn den den befinner seg i.<br>
+			linTab tabellen som deler hele tabellen inn i enkelte verdier, bruker String.split på linjen. split() tar regex, så vi bruker vår deler, og vi setter også en grense for hvor mange deler vi vil få ut av split().<br>
+			Denne grensen er 11, 5 verdier hver for startdatoen og sluttdatoen, pluss selve hendelsen.<br>
+			Grunnen til at vi gjør dette er at vi ikke vil ende opp med å splitte en hendelse som inneholder tegn utenom 0-9a-zA-Z, som f. eks. æ, ø, å, punktum og komma.<br>
+			Siden hendelsen kommer sist og split() oppererer fra venstre til høyre vil vi nå grensen av 11 strenger før metoden får en sjanse til å dele opp hendelsen inn i flere strenger.<br>
+			Vi setter in staDat sine verdier med en for-løkke fra null til-og-med 4, vi kunne også sagt at i &lt; 5 slik at vi ikke både sjekker om i er mindre og lik, men det gjør det også mindre oversiktlig.<br>
+			Her bruker vi også Integer.parseInt, hvis du skriver Integer vil du ikke trenge å importere Integer, men du kan også gjøre det om du vil.<br>
+			I løkken for sluDat må vi forskyve en av indeksene med 5 siden vi skal gå fra indeks 0 til 4 i sluDat samtidig som vi går fra indeks 5 til 9 i linTab.<br>
+			Til slutt setter vi hendelse til å være den siste variabelen i linTab, som alltid er lengden minus &egrave;n.<br><br>
+
+			Her kan vi også legge til en standard konstruktør:</p>
+<div class=code><pre>
+public Hendelse() {
+		
+	this("0:0:0:0:0:0:0:0:0:0:INGENHENDELSE");
+		
+}
+</pre></div>
+		<p>Nå vil en enkel metode i Kalender la oss legge til hendelser:</p>
+<div class=code><pre>
+public void nyHendelse(String linje) {
+		
+	kalTab[AntLin] = new Hendelse(linje);
+	AntLin++;
+	
+}
+</pre></div>
+		<p>Vi øker AntLin her, slik at vi skriver og leser alle linjene med hendelser.<br>
+			Det er viktig å huske at man må bruke lagre() metoden når man er ferdig, for å faktisk lagre de nye linjene.<br>
+			Men noe som lagre() avhenger av er en getLinje() metode i Hendelse, la oss generere og lage denne og noen flere metoder i Hendelse klassen:</p>
+<div class=code><pre>
+public int[] getStaDat() {
+		
+	return staDat;
+	
+}
+
+public void setStaDat(String staDat) {
+	
+	this.staDat = staDat;
+	
+}
+
+public int[] getSluDat() {
+	
+	return sluDat;
+	
+}
+
+public void setSluDat(String sluDat) {
+	
+	this.sluDat = sluDat;
+	
+}
+
+public String getHendelse() {
+	
+	return hendelse;
+	
+}
+
+public void setHendelse(String hendelse) {
+	
+	this.hendelse = hendelse;
+	
+}
+
+public String getLinje() {
+	
+	return linje;
+	
+} 
+</pre></div>
+		<p>Den nederste metoden her, getLinje(), vil gi oss akkurat den samme linjen som vi fikk av brukeren, vi trenger ikke å endre den med mindre brukeren vil endre datoer eller hendelser.<br>
+			Det betyr også at vi må endre set-metodene litt for å oppdatere linje, i tillegg til noen andre små endringer.<br>
+			La oss begynne med setStaDat:</p>
+<div class=code><pre>
+public void setStaDat(String staDat) {
+		
+	String[] staDatTab = staDat.split(deler);
+		
+	for(int i = 0; i &lt;= 4; i++) {
+			
+		this.staDat[i] = Integer.parseInt(staDatTab[i]);
+			
+	}
+		
+	oppdater('a');
+		
+}
+</pre></div>
+		<p>Vi vil igjen bruke split, og du kunne brukt en annen regex her ("[^0-9]+") for å unngå å inkludere bokstaver.<br>
+			Vi omgjør det også til int og kaller oppdater('a');<br>
+			oppdater(), som vi vil skrive senere, har en char, et enkelt tegn, som parameter.<br>
+			I dette tilfellet er det bare for å bruke noe som tar lite plass, selv om det ikke ville gjort noen stor forskjell i dette tilfellet.</p>
+<div class=code><pre>
+public void setSluDat(String sluDat) {
+		
+	String[] sluDatTab = sluDat.split(deler);
+		
+	for(int i = 0; i &lt;= 4; i++) {
+			
+		this.sluDat[i] = Integer.parseInt(sluDatTab[i]);
+			
+	}
+		
+	oppdater('b');
+		
+}
+</pre></div>
+		<p>setSluDat() er nesten helt lik, men gir det aktuelle parameteret 'b', som lar oss skille hva som skal oppdateres.</p>
+<div class=code><pre>
+public void setHendelse(String hendelse) {
+		
+	this.hendelse = hendelse;
+		
+	oppdater('c');
+		
+}
+</pre></div>
+		<p>setHendelse() er relativt enkel.<br>
+			La oss lage oppdater() metoden som de andre avhenger av:</p>
+<div class=code><pre>
+private void oppdater(char nytt) {
+		
+	if(nytt == 'a') {
+			
+		for(int i = 0; i &lt;= 4; i++) {
+				
+			linTab[i] = String.valueOf(this.staDat[i]);
+				
+		}
+			
+	} else if(nytt == 'b') {
+		
+		for(int i = 0; i &lt;= 4; i++) {
+			
+			linTab[i + 5] = String.valueOf(this.sluDat[i]);
+				
+		}
+			
+	} else {
+			
+		linTab[10] = hendelse;
+			
+	}
+
+	linje = "";
+		
+	for(int i = 0; i &lt; linTab.length; i++) {
+			
+		linje += linTab[i] + ":";
+			
+	}
+	
+	linje = linje.substring(0, linje.length() - 1);
+	
+}
+</pre></div>
+		<p>Her ser vi hvordan oppdater fungerer, vi ser hva som har endret seg, oppdaterer den delen av linTab tabellen, tømmer linjen, og setter inn de oppdaterte variablene.<br>
+			Vi bruker også linje.substring() til å få en ny String som går fra 0 til lengden til linje minus &egrave;n, som praktisk talt tar vekk det siste tegnet, kolon.<br>
+			Hvis vi har endret en dato eller hendelse i et Hendelse objekt vil linje da være oppdater for når lagre() bruker getLinje() til å skrive til filen.<br><br>
+
+			Nå kommer vi tilbake til to metoder som skal gjøre det litt lettere å lage en hendelse for en bruker, &egrave;n for å sortere datoer fra det vanlige formatet og &egrave;n for å kunne spørre om data flere ganger og sette de sammen.<br>
+			Vi vil begynne med sorteringen(i Kalender):</p>
+<div class=code><pre>
+public String konvDato(String dato) {
+		
+	String nyDat = "";
+		
+	String[] datTab = dato.split(deler);
+	int[] datIntTab = new int[5];
+		
+	datIntTab[0] = Integer.parseInt(datTab[4]);
+	datIntTab[1] = Integer.parseInt(datTab[3]);
+	datIntTab[2] = Integer.parseInt(datTab[2]);
+	datIntTab[3] = Integer.parseInt(datTab[0]);
+	datIntTab[4] = Integer.parseInt(datTab[1]);
+	
+	for(int e : datIntTab) {
+			
+		nyDat += e + ":";
+			
+	}
+
+	nyDat = nyDat.substring(0, nyDat.length() - 1);
+	return nyDat;
+		
+}
+</pre></div>
+		<p>Vi omgjør data til int etter å splitte med deler variabelen i Kalender klassen.<br>
+			Vi sorterer så tidsenhetene slik: time, minutt, dag, måned, år > år, måned, dag, time, minutt for lagring i talltabellen(datIntTab).<br>
+			Vi legger sammen tidsenhetene til en linje og tar vekk det siste tegnet igjen.<br>
+			Du lurer kanskje på hvorfor vi tar vekk det siste tegnet her siden en dato aldri vil være det siste i en linje, men vi skal også bruke konvDato til andre metoder.<br>
+			Dette skal vi se på etter metoden for sammensetting av datoene og hendelsen:</p>
+<div class=code><pre>
+public String kombInndata(String staDat, String sluDat, String hendelse) {
+		
+	String komb = "";
+		
+	staDat = konvDato(staDat);
+	sluDat = konvDato(sluDat);
+	
+	komb = staDat + ":" + sluDat + ":" + hendelse;
+		
+	return komb;
+		
+}
+</pre></div>
+		<p>Denne metoden, som også er i Kalender, bruker konvDato for å omgjøre brukerens inndata til brukbar data, for så å sette det sammen.<br>
+			Som du ser kan oppdeling inn i flere metoder gjøre ting ganske klart og enkelt, det gir også mer fleksibilitet siden vi kan bruke konvDato igjen.<br>
+			Det er nemlig det vi skal gjøre for å kalle og gi vår neste metode en brukbar dato:</p>
+<div class=code><pre>
+public boolean[] finnDatoHendelser(String dato) {
+		
+	boolean[] indekser = new boolean[AntLin];
+	
+	String[] datTxtTab = dato.split(deler);
+	int[] datTab = new int[5];
+		
+	for(int i = 0; i &lt; datTxtTab.length; i++) {
+			
+		datTab[i] = Integer.parseInt(datTxtTab[i]);
+			
+	}
+		
+	for(int i = 0; i &lt; AntLin; i++) {
+			
+		indekser[i] = kalTab[i].harDato(datTab);
+			
+	}
+		
+	return indekser;
+		
+}
+</pre></div>
+		<p>Denne metoden brukes til å finne hendelser som skjer på en viss dato, dette returneres i form av en boolean tabell som igjen kan la oss kombinere dette med andre søk og gi indekser for søkeresultat.<br>
+			Boolean tabellen vil kalles indekser, siden sannhetsverdien er om hendelsen med indeksen 'i' i kalTab pågår sammtidig som datoen som vi får som parameter.<br>
+			Vi splitter igjen datoen, omgjør, og setter den inn i datTab som int verdier.<br>
+			Så går vi gjennom alle linjene med hendelser. (Vi kan også bruke i igjen, siden i bare eksisterer innenfor løkken. Det vil også si at det ikke fungerer for løkker i løkker)<br>
+			Her setter vi alle verdiene i boolean tabellen indekser til en harDato metode i hver Hendelse objekt som returnerer en boolean verdi.<br>
+			Denne metoden til Hendelse-klassen er litt innviklet, så vi deler den opp i flere deler.<br>
+			Vi begynner med dette:</p>
+<div class=code><pre>
+public boolean harDato(int[] datTab) {
+		
+	int j = 0;
+	boolean erEtterSta = false;
+	boolean heltFerdig = false;
+		
+	while(!(erEtterSta &amp;&amp; heltFerdig) &amp;&amp; j &lt; staDat.length) {
+		
+	} 
+	
+} 
+</pre></div>
+		<p>Denne metoden tar en mer ordnet int tabell som argument, grunnen til dette var at man ikke vil konvertere Stringen hver gang vi går gjennom løkken i harDato, men en gang i finnDatoHendelser.<br>
+			Vi lager en tellerverdi j og to boolean verdier erEtterSta og heltFerdig.<br>
+			Grunnen til at vi har erEtterSta er for å se om hendelsen enten begynner før eller samtidig som datoen vi jobber med.<br>
+			Om den ikke gjør det er vi også "heltFerdig" og kan hoppe over en del beregninger.<br><br>
+
+			Vi har en while-løkke som går mens vi ikke: er etter startdatoen, er ferdige, eller har nådd staDat.length med j.<br>
+			Her er det også viktig å huske en del ting: erEtterSta betyr bare at vi vet om vi er etter startdatoen, det at den er falsk betyr ikke nødvendigvis at vi ikke er etter startdatoen inntil vi har gått gjennom hele datoen(j == (staDat.length - 1)).<br>
+			Hvis vi faktisk vet resultatet tidligere bruker vi heltFerdig variabelen.<br><br>
+
+			La oss se hva som er inni while-løkken og se hvordan vi faktisk sammenligner datotabellene(husk at vi går fra år([0]) til minutt([4])):</p>
+<div class=code><pre>
+if(datTab[j] > staDat[j]) {
+
+	erEtterSta = true;
+				
+} else if(datTab[j] == staDat[j]) {
+
+	if(j == (staDat.length - 1)) {
+
+		erEtterSta = true;
+		heltFerdig = true;
+
+	} else {
+					
+		j++;
+				
+	}
+				
+} else {
+
+	heltFerdig = true;
+				
+}
+</pre></div>
+		<p>Vi ser først om verdien i staDat, startdato-tabellen til Hendelse objektet, er større enn(senere dato) verdien i søketabellen datTab.<br>
+			Om dette er sant vet vi at datoen til Hendelsen er etter søkedatoen.<br>
+			Om datoene er helt like kan vi godt si at Hendelsen skjer "etter" søkedatoen og at vi er helt ferdig, siden hendelsen begynner det samme minuttet som tiden vi søker etter.<br>
+			Dette går bare hvis j == (staDat.length - 1), altså at vi sammenligner minutter.<br>
+			Hvis vi sammenligner datTab[0] med staDat[0] og de er like vet vi bare at vi har samme år.<br>
+			I det tilfelle sier vi j++, vi må fortsette ned tabellene med tidsenheter og se på måneder, og om de er like, dager, osv.<br>
+			Den siste else delen skjer om datTab[j] er mindre enn staDat[j], hendelsen vår starter etter søkedatoen og vi vet at det ikke er vits i å gjøre noe mer.<br>
+			Siden vi vet at vi er ferdige med heltFerdig, vet vi også at vi vet erEtterSta og at resultatet i variabelen faktisk teller, siden den har false som standardverdi.<br><br>
+
+			Om vi derimot ikke er "heltFerdig" har vi noe mer å gjøre etter while-løkken:</p>
+<div class=code><pre>
+if(!heltFerdig) {
+
+	boolean erFoerSlu = false;
+	j = 0;
+				
+	while(!heltFerdig &amp;&amp; j &lt; sluDat.length) {
+					
+		if(datTab[j] &lt; sluDat[j]) {
+						
+			erFoerSlu = true;
+			heltFerdig = true;
+						
+		} else if(datTab[j] == sluDat[j]) {
+						
+			if(j == (sluDat.length - 1)) {
+							
+				erFoerSlu = true;
+				heltFerdig = true;
+						
+			} else {
+							
+				j++;
+							
+			}
+						
+		} else {
+						
+			heltFerdig = true;
+						
+		}
+					
+	}
+				
+	return erFoerSlu;
+				
+} else {
+
+	return erEtterSta;	
+					
+}
+</pre></div>
+		<p>Vi spør om det er vits i å gjøre noe mer med "if(!heltFerdig)".<br>
+			Om søkedatoen er etter startdatoen vet vi at hendelsen kan pågå samtidig som datoen som vi får som parameter.<br>
+			I det tilfeller hvor søkedatoen er etter startdatoen, og ikke skjer akkurat på startdatoen, er heltFerdig alltid sant, så "&amp;&amp; erEtterSta" er ikke nødvendig her.<br>
+			Vi må bare bekrefte at søkedatoen er før sluttdatoen til hendelsen, siden hendelsen kan både begynne og slutte før søkedatoen, og derfor ikke være relevant.<br><br>
+
+			Her er logikken ganske lik den forrige løkken.<br>
+			Vi kan også gjenbruke noen variabler, som  j og heltFerdig.<br>
+			Noe du også kunne ha gjort er å sette j til 6 i begge løkkene istedenfor heltFerdig for å bruke mindre variabler.<br> 
+			"while"-løkken her vil bruke en lignende sannhetsverdi til den siste while-løkken.<br>
+			Noe annet som er forskjellig er at vi spør om søkedatoen er mindre enn sluttdatoen til hendelsen(datTab[j] &lt; sluDat[j]).<br>
+			Hvis søkedatoen er etter sluttdatoen til hendelsen vet vi at den erFoerSlutt, som har false som standardverdi, faktisk skal telles, som vi kan merke med heltFerdig.<br>
+			Vi kunne også ha brukt erFoerSlu istedenfor heltFerdig i noen av delene, men da måtte vi også sjekket dette i while-løkken.<br>
+			Etter denne while-løkken er det erFoerSlutt som er den avgjørende sannhetsverdien, så det er den som sendes.<br>
+			Hvis den "if(!heltFerdig)" var usann og vi ikke trengte erFoerSlu variabelen, er erEtterSta den avgjørende sannhetsverdien, som derfor returneres alene.<br><br>
+
+			Dermed har vi en funksjonell søkefunskjon for å søke etter datoer og få en boolean tabell.<br>
+			Før vi tar denne videre i bruk skal vi lage en til metode i Hendelse klassen:</p>
+<div class=code><pre>
+public boolean harHendelse(String hendSoek) {
+		
+	return hendelse.toLowerCase().contains(hendSoek.toLowerCase());
+		
+} 
+</pre></div>
+		<p>Vi får en String med en søkehendelse som vi sammenligner med vår egen hendelse.<br>
+			contains() metoden sammenligner to String verdier og returnerer en boolean verdi.<br>
+			Vi bruker også toLowerCase metoden, som returnerer en versjon, av en String, med små bokstaver.<br>
+			På lik måte som med harDato() blir denne metoden kalt fra en Kalender-metode som går gjennom alle hendelsene:</p>
+<div class=code><pre>
+public boolean[] finnTekstHendelser(String innhold) {
+		
+	boolean[] indekser = new boolean[AntLin];
+	String liteInnhold = innhold.toLowerCase();
+		
+	for(int i = 0; i &lt; AntLin; i++) {
+			
+		indekser[i] = kalTab[i].harHendelse(innhold);
+			
+	}
+		
+	return indekser;
+		
+}
+</pre></div>
+		<p>finnTekstHendelser() har et parameter som tar inn en String verdi, igjen kunne vi ha laget en litenInnhold i Hendelse-klassen.<br> 
+			Vi unngår dette siden vi ikke har lyst til å gjøre denne konversjonen hver gang vi går gjennom løkken av hendelser.<br>
+			I løkken setter vi indeksene til booleanverdien som hver harHendelse() returnerer.<br>
+			Siden disse booleanverdiene sier sannhetsverdien for søket for hendelsen i kalTab med samme indeks, kan vi lage en tilIndeks() metode som returnerer indeksene til indeksen med true:</p>
+<div class=code><pre>
+public List&lt;Integer&gt; tilIndeks(boolean[] boolTab) {
+		
+	List&lt;Integer&gt; indekser = new ArrayList&lt;&gt;();
+		
+	for(int i = 0; i &lt; AntLin; i++) {
+			
+		if(boolTab[i]) {
+				
+			indekser.add(i);
+				
+		}
+		
+	}
+		
+	return indekser;
+		
+}
+</pre></div>
+		<p>Her bruker vi en liste istedenfor en tabell. Grunnen til at vi gjør dette er at vi ikke vet antall variabler vi skal lagre i listen på forhånd.<br>
+			Med en liste trenger du ikke å vite hvor mye du skal lagre, du kan bare legge til mer når du vil.<br>
+			Som formelt parameter har vi en booleantabell, som vi får fra søkefunksjonene.<br>
+			Måten vi deklarerer listen på er litt spesiell, vi skriver at vi skal lagre Integer verdier.<br> 
+			Selv om int teknisk sett har et annet variabelnavn kan int-verdiene	 lagres her.<br>
+			Vi skriver også = new ArrayList&lt;&gt;();. Det er viktig å huske å ha med både pilene og parentesene her.<br>
+			Før Java 7 må man også skrive ArrayList&lt;Integer&gt;(); istedenfor ArrayList&lt;&gt;();, så prøv det om du får en feil.<br>
+			Vi bruker igjen en løkke, for å gå gjennom så mange indekser som det er hendelser.<br>
+			Vi bruker så if(boolTab[i]) istedenfor if(boolTab[i] == true), siden sannhetsverdien i tabellen er informasjon for if.<br>
+			Vi bruker en listemetode som heter add. Den vil legge en variabel til slutten av listen.<br>
+			Vi legger til "i" her, siden det bare er indeksverdien av hendelser som tilfredsstiller søket som vi er interessert i.<br>
+			Når vi har denne listen returnerer vi den til den som kallet på metoden.<br><br>
+
+			Dette kan vi bruke til å gi hendelsene som tilfredstiller søket til en printemetode eller en slettemetode.<br>
+			La oss begynne med en metode som returnerer en mer elegant skrevet String, som beskriver en Hendelse med en indeks i kalTab som parameter:</p>
+<div class=code><pre>
+public String giPenHendelse(int indeks) {
+		
+	String penTxt;
+		
+	if(kalTab[indeks] != null) {
+			
+		penTxt = kalTab[indeks].penLinje();
+		
+	} else {
+			
+		penTxt = "Hendelsen med denne indeksen eksisterer ikke.";
+			
+	}
+		
+	return penTxt;
+		
+}
+</pre></div>
+		<p>Først sjekker vi om verdien i indeksen ikke er null.<br>
+			null betyr at det ikke er en verdi, og tilsvarer ikke til tallet eller en sannhetsverdi.<br> 
+			Alle verdier kan bli satt til null og du kan returnere null istedenfor den relevante verditypen.<br>
+			Det kan være lurt å sjekke at noe ikke er null for å unngå feil, selv om det er litt unødvendig her.<br>
+			Hvis hendelsen i tabellen faktisk ikke er null, kaller vi en penLinje() metode i Hendelse klassen.<br>
+			Resten av denne metoden er relativt enkel, så vi hopper videre til penLinje() metoden:</p>
+<div class=code><pre>
+public String penLinje() {
+		
+	String penTxt = "fra: " + penDato(staDat) + " til: " + penDato(sluDat) + ": " + hendelse;
+		
+	return penTxt;
+		
+}
+</pre></div>
+		<p>Denne returnerer en pent sammensatt String av lokale variabler og bruker også enda en metode i klassen, penDato():</p>
+<div class=code><pre>
+private String penDato(int[] dato) {
+		
+	String datTxt = dato[3] + ":" + dato[4] + " " + dato[2] + "/" + dato[1] + "/" + dato[0];
+		
+	return datTxt;
+		
+}
+</pre></div>
+		<p>penDato er privat siden den bare brukes i Hendelse-klassen. Den bruker en int tabell, som vi allerede har liggende rundt her for både startdato og sluttdato.<br>
+			Som du ser er rekkefølgen av tidsenhetene i datotabellen litt rar, dette er siden vi går fra år:måned:dag:time:minutt til time:minutt:dag:måned:år.<br>
+			Den ene versjonen ser bedre ut og er mer vanlig, den andre gjør det lettere å søke gjennom datoer.<br>
+			Vi bruker denne metoden to ganger i penLinje() og returnerer den pene linjen tilbake til giPenHendelse() i Kalender, som returnerer den videre til hva enn som kaller den metoden.<br>
+			Noe annet vi vil gjøre med en kalender er å slette hendelser med en indeks:</p>
+<div class=code><pre>
+public boolean slettHendelse(int indeks) {
+		
+	boolean eksisterer = true;
+		
+	if(kalTab[indeks] != null) {
+			
+		kalTab[indeks] = kalTab[AntLin - 1];
+			
+		kalTab[AntLin - 1] = null;
+		AntLin--;
+			
+	} else {
+			
+		eksisterer = false;
+			
+	}
+		
+	return eksisterer;
+		
+}
+</pre></div>
+		<p>Her returnerer vi faktisk en booleanverdi, eksisterer. Om Hendelse objektet med indeksen ikke er en Hendelse med denne indeksen kan det være lurt å gi en mulighet til å si ifra.<br>
+			Hvis en bruker f. eks. har gitt en feil indeks kan de få vite om det slik at de får slettet den hendelsen som de faktisk ville slette.<br>
+			Vi antar at eksisterer er sant siden det sannsynligvis er tilfellet. Vi vil ikke måtte endre variabelen oftere enn vi trenger å gjøre det.<br>
+			Her spør vi igjen om hendelsen med den gitte indeksen i kalTab eksisterer(!= null).<br>
+			Hvis dette er sant sier vi ikke bare at den plassen i kalTab blir lik null, men hvorfor ikke?<br>
+			Hvis vi går gjennom tabellen kalTab, som vi gjør mange ganger i Kalender-klassen, vil vi unngå treffe null siden det kan gi oss feil og eller kaste bort tid hvis vi konstant sjekker om verdien er null.<br>
+			Derfor setter vi indeksen som skal slettes til å være lik den siste verdien i tabellen istedenfor.<br>
+			Nå har vi ikke hendelsen som skulle slettes mer, men vi har to kopier av en hendelse som vi bare skal ha en av.<br>
+			Dette retter vi opp ved å sette den siste verdien til null, og vi har en uavbrutt tabell med ingen kopier av hendelser og vi trengte bare å endre to verdier.<br>
+			Problemet nå er at hvis vi bruker AntLin vil vi akkurat nå ha null som den siste verdien i tabellen vår.<br>
+			For å unngå at dette skjer merker vi at antall hendelser har blitt redusert med 1 ved å si: AntLin--;<br>
+			Hvis verdien vi skulle slettet hadde vært lik null ville vi istedenfor bare satt eksisterer til null slik at det blir sagt ifra om det.<br>
+			Vi kunne også printet ut en feilmelding istedenfor.<br><br>
+
+			Noe annet vi kan gjøre for å gjøre søkemetodene kraftigere er å lage en kombinasjonsmetode.<br>
+			Denne metoden vil se på to boolean tabeller fra søk og returnere en kombinasjon hvor bare indekser som tilsvarer hendelser i kalTab vil være sanne hvis den relevante hendelsen ga true for begge søkeresultatene.<br>
+			Metoden er ganske enkel, og også nyttig:</p>
+<div class=code><pre>
+public boolean[] kombinerSoek(boolean[] bool1, boolean[] bool2) {
+		
+	boolean[] kombTab = new boolean[AntLin];
+		
+	for(int i = 0; i &lt; AntLin; i++) {
+			
+		kombTab[i] = bool1[i] &amp;&amp; bool2[i];
+			
+	}
+		
+	return kombTab;
+		
+}
+</pre></div>
+		<p>Tabellen bruker en løkke som sier at kombTab[i] er sann bare hvis de to andre boolske verdiene med indeks i er sanne.<br>
+			Dette returneres tilbake og kan brukes av tilIndeks på akkuratt samme måte som en ukombinert sannhetstabell fra et enkelt søk.<br>
+			Vi kan også kombinere kombinerte sannhetstabeller, men for å gjøre ting litt renere kan vi lage en kopi av kombineringsmetoden som tar 3 parametre og sammenligner 3 verdier om gangen istedenfor:</p>
+<div class=code><pre>
+public boolean[] kombinerSoek(boolean[] bool1, boolean[] bool2, boolean[] bool3) {
+		
+	boolean[] kombTab = new boolean[AntLin];
+		
+	for(int i = 0; i &lt; AntLin; i++) {
+			
+		kombTab[i] = bool1[i] &amp;&amp; bool2[i] &amp;&amp; bool3[i];
+			
+	}
+		
+	return kombTab;
+		
+}
+</pre></div>
+		<p>Det burde være alt, nå er det bare å teste ut metodene til Kalender ved å kalle de fra klientklassen.<br>
+			Hvis du vi gjøre noe for alle elementer i en liste kan du bruke en forenklet løkke.<br>
+			Eks:</p>
+<div class=code><pre>
+Kalender kal = new Kalender("kalender.txt");
+
+List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+list = kal.tilIndeks(kal.finnTekstHendelser("søkeord"));
+for(int e : list) {
+		
+	System.out.println(kal.giPenHendelse(e));
+			
+}
+</pre></div>
+		<p>Husk å lagre endringene med lagre() metoden, ellers vil du bare få en fil med antall hendelser på første linje og beskrivelsen på andre linje.</p>
+	</div>
+	<div class="bottom_menu">
+  		<div class="bottom_menu_element"><a href="Flerdimensjonelle_Tabeller.html">Forrige Eksempel</a></div>
+  		<div class="bottom_menu_element"><a href="JavaForside.html">Alle Eksempler</a></div>
+  		<div class="bottom_menu_element"><a href="FeilHandtering.html">Neste Eksempel</a></div>
+	</div>
+</body>
+</html>

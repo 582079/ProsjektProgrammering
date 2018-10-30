@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="nb">
+<meta charset="utf-8">
+<title>Unntakshåndtering</title>
+<link rel="stylesheet" href="JavaCodeStyle.css">
+</head>
+<body>
+	<div class="menu">
+  		<div class="menu_element"><a href="../om_oss.html">Om Oss</a></div>
+  		<div class="menu_element"><a href="JavaForside.html">Alle Eksempler</a></div>
+  		<div class="menu_element"><a href="../ProsjektBeskrivelse.html">Om Prosjektet</a></div>
+	</div>
+	<div class=container>
+		<h1>unntak Håndtering</h1>
+		<p>I forrige eksempel(Kalenderen) hadde vi en lagre metode som brukte unntakshåndtering:</p>
+<div class=code><pre>
+public void lagre() throws Exception {
+		
+	try {
+			
+		skaper = new FileWriter(kalender);
+		buffer = new BufferedWriter(skaper);
+		settInn = new PrintWriter(buffer);
+		
+		settInn.println(AntLin);
+		settInn.println(verdiBes);
+			
+		for(int i = 0; i &lt; AntLin; i++) {
+			
+			settInn.println(kalTab[i].getLinje());
+			System.out.println("skrive en linje til fil");
+			
+		}
+			
+	} finally {
+			
+		settInn.close();
+			
+	}
+		
+}
+</pre></div>
+		<p>Som du ser har vi en throws Exception, dette er en ganske kjapp og generell måte å få unntak uten å gjøre noe med de.<br>
+			Som du også kan se vil vi helst lage variablene utenfor try for å gjøre det som kan skape unntak innenfor try-blokken(det er derfor det heter "try", vi "prøver").<br>
+			Hva kunne gått galt? Hvis vi refererer til et filnavn som ikke finnes kan det lages en ny fil med det filnavnet.<br>
+			Noe programmet ikke tar seg av er å lage mapper der det ikke finnes. Hvis du hadde skrevet feil mappenavn inn i et program ville du sannsynligvis ikke at programmet skulle lage alle de nye mappene, men melde fra for å la deg rette opp feilen.<br>
+			De forskjellige unntakene vi kan få er en del av Exception, og har egne navn. Hvis en fil ikke finnes, slik som det kan hvis vi vil lese av en fil med en Scanner, får vi en FileNotFoundException.<br>
+			Dette er igjen en del av IOException, som betyr InputOutputException, siden vi sender og henter data fra en HDD eller SSD når vi jobber med filer.<br>
+			IOException er igjen en del av Exception generelt. Derfor vil throws Exception dekke IOException, og IOException ville dekket FileNotFoundException.<br>
+			Men FileNotFoundException vil ikke dekke SecurityException, som er en annen del av IOException.<br>
+			Vi kan bruke IOException til å fange mer generelle unntak, men la oss prøve å lage flere catch-blokker for å fange opp unntak etter try:</p>
+<div class=code><pre>
+catch(FileNotFoundException ex){
+
+	System.out.println(ex.toString() + "\n Filen finnes ikke."
+	
+}
+
+catch(SecurityException ex){
+
+	System.out.println(ex.toString() + "\n Du har ikke tilgang til denne filen."
+	
+}
+</pre></div>
+		<p>Med disse catch blokkene lager vi en variabel av unntak om de oppstår, vi kan så videreformidle dette unntaket ved hjelp av println(), eller showMessageDialog() for et grafisk vindu.<br>
+			Så kommer vi til finally, denne blokken vil skje uansett hva som skjer. Som nevnt i det siste eksempelet kan en fil være utilgjengelig for andre programmer om du ikke "lukker" filen.<br>
+			Siden vi nå har catch-blokkene kan vi ta vekk "throws Exception" delen av metoden, siden vi håndterer det selv:</p>
+<div class=code><pre>
+public void lagre() {
+</pre></div>
+		<p>Som du kan se beskriver også navnene ganske godt hva som er unntakene og du kan bruke denne beskrivelsen til å gi mer forståelige feilmeldinger til brukere.<br>
+			Om et unntak ikke er helt forståelig kan du også lese Java dokumentasjonen for unntakene på docs.oracle.com.</p>
+	</div>
+	<div class="bottom_menu">
+  		<div class="bottom_menu_element"><a href="Kalender.html">Forrige Eksempel</a></div>
+  		<div class="bottom_menu_element"><a href="JavaForside.html">Alle Eksempler</a></div>
+  		<div class="bottom_menu_element"><a href="JavaForside.html">Neste Eksempel</a></div>
+	</div>
+</body>
+</html>
