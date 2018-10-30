@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <title>Jan Erik</title>
 <link rel="stylesheet" href="JEStyleSheet.css">
-<!-- <script type="text/javascript" src="TabellJS.js"></script> -->
+<style>div#body{display:none;}</style>
 <script src="jquery-3.3.1.js"></script>
+
 </head>
 <body>
 	<div class="menu">
@@ -16,20 +17,55 @@
   		<div class="menu_element"><a href="Erlend.html">Erlend</a></div>
   		<div class="menu_element"><a href="JanErik.html">Jan Erik</a></div>
 	</div>
-	<div class="container">
+	<div class="container" id="container">
 		
 		<img src="Janerik.jpeg" width=250 height=300 alt="Jan Erik">
 	
-		<h2>Erfaring i programmering:</h2>
-		<table id="experienceTable">
+		<h2 id="title">Erfaring i programmering:</h2>
+		<noscript><table id="experienceTable">
  			<tr>
  				<th><p>Kjent med</p></th>
 				<th><p>Ny</p></th>
 			</tr>
+			<tr>
+				<th><p>ActionScript 3.0</p></th>
+				<th><p>Java</p></th>
+			</tr>
+			<tr>
+				<th><p>Markup språk som XML og HTML</p></th>
+				<th><p>CSS</p></th>
+			</tr>
 		</table>
-
+		</noscript>
+		<noscript><div id="body"></noscript>
 		<script>
 		$(document).ready(function(){
+			//generer tabell med headerrad
+			var tab = $(document.createElement('table'));
+			var para = $(("#paragrafer"));
+			var parentDiv = $(("#container"));
+			tab.insertBefore(para);
+			//tab.appendTo(parentDiv);
+			//parentDiv.appendTo('.container');
+			//tab.appendTo(parentDiv);
+			//var parentDiv = title.parentNode;
+			//parentDiv.insertBefore(tab, $(document.getElementById("#paragrafer")));
+			//$("#paragrafer").parent(".container").insertBefore(tab, $("#paragrafer"));
+			//insertedNode.appendTo("#container");
+			//$("#paragrafer").parent(".container").prepend(tab);
+			//tab.appendTo("#container");
+			
+			
+			var tr = $(document.createElement('tr')).appendTo(tab);
+			tab.className = "likerTabell";
+			var th1 = $(document.createElement('th'));
+			var th1cont = $(document.createTextNode("Kjent med"));
+			th1.appendTo(tr);
+			th1cont.appendTo('th');
+			var th2 = $(document.createElement('th'));
+			var th2cont = $(document.createTextNode("Ny"));
+			th2.appendTo(tr);
+			th2cont.appendTo(th2);
 			
 			$.ajax({
 				
@@ -41,10 +77,9 @@
 					$(xml).find('row').each(function(){
 						
 						var experience = $(this).find('experienced').text();
-// 						var experience = $(this).attr('experience')
 						var _new = $(this).find('_new').text();
 						console.log("variables" + experience + _new)
-						$('<tr></tr>').html('<td>' +experience+ '</td><td>' +_new+ '</td').appendTo('#experienceTable');
+						$('<tr></tr>').html('<td>' +experience+ '</td><td>' +_new+ '</td').appendTo(tab);
 						
 					});
 					
@@ -57,8 +92,9 @@
 		});
 		
 		</script>
+		<noscript></div></noscript>
 		
-		<div class="paragrafer">
+		<div class="paragrafer" id="paragrafer">
 			<strong>Opplevelse med språkene:</strong>
 			<p>ActionScript var det første programmeringsspråket jeg lærte.<br>
 			Det er begrenset, lukket, og fremfor alt utdatert, men det lot deg gjøre en del ting som kunne være spennende.<br>
@@ -74,6 +110,7 @@
 			Java har også et større bruksområde enn ActionScript, som gir mange muligheter.<br>
 			Jeg er ny når det kommer til CSS, og jeg synes det ser veldig spennende og elegant ut.</p>
 		</div>
+		<div class="download"><a href="#DOWNLOAD">Last ned</a></div>
 	</div>
 </body>
 </html>
