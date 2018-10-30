@@ -14,7 +14,7 @@
 	<div class=container>
 		<h1>Enkel Interaksjon</h1>
 		<p> Med et bibliotek som heter JOptionPane kan vi lage enkel interaksjon mellom en bruker og programmet.<br>
-			Etter vi har laget et skjellet, den grunnleggende koden, må vi importere JOptionPane.<br>
+			Etter vi har laget et skjelett med den grunnleggende koden, må vi importere JOptionPane.<br>
 			Dette gjør vi ved å skrive dette etter package linjen:</p>
 		<div class=code><pre>
 import static javax.swing.JOptionPane.*;
@@ -37,12 +37,12 @@ public class HelloWorld {
 </pre></div>
 		<p>
 			Dette gjør at vi kan bruke alle metodene i biblioteket JOptionPane.<br>
-			Og dette kan vi bruke til å lage en ny verisjon av HelloWorld, som inkluderer navnet til brukeren.<br>
+			Og dette kan vi bruke til å lage en ny versjon av HelloWorld, som inkluderer navnet til brukeren.<br>
 			Den første metoden fra JOptionPane vi vil bruke da er showInputDialog().<br>
 			showInputDialog() tar en melding til brukeren(en String) som parameter.<br>
 			Verdien som showInputDialog returnerer er også en String verdi.<br>
 			Det vil si at vi kan sette en String til å være lik en showInputDialog().<br>
-			Da vil Java kj?re denne metoden n?r den skal gi en verdi til variabelen.<br>
+			Da vil Java kjøre denne metoden når den skal gi en verdi til variabelen.<br>
 			Vi gjør dette i main metoden, slik som dette: </p>
 			<div class=code><pre>
 String navnTxt = showInputDialog("Gi et navn");
@@ -53,14 +53,14 @@ String navnTxt = showInputDialog("Gi et navn");
 			Da vil navnTxt bli gitt denne verdien.</p>
 		<p>
 			Nå sier ikke programmet noe etter du har gitt et navn.<br>
-			Vi kunne ha fikset dette med System.out.println(), men vi skal bruke en til metode fra JOptionPane.<br>
+			Vi kunne ha fikset dette med System.out.println(), men vi skal bruke &egrave;n til metode fra JOptionPane.<br>
 			showMessageDialog() lar deg gi en melding til en bruker.<br>
 			Hvorfor skal vi bruke dette istedenfor System.out.println()?<br>
 			Vi bruker showMessageDialog() siden en bruker kan se meldingen.<br>
 			Før vi setter inn noe er det viktig å vite at showInputDialog trenger to parametre.<br>
 			Parametere er separert med komma og må alltid være av riktig type og i riktig rekkefølge.<br>
 			Som det første parameteret for showMessageDialog vil vi gi verdien null.<br>
-			Dette er en spesiel tom variabel som betyr at det ikke er noen verdi, det er ikke det samme som et tall 0.<br>
+			Dette er en spesiell tom variabel som betyr at det ikke er noen verdi, det er ikke det samme som et tall 0.<br>
 			Vi bruker et komma som en separator og gir en String verdi.<br>
 			Nå begynner vi med "Hello, ", men dette sier ikke noe navn.<br>
 			Etter det høyre hermetegnet skriver vi et plusstegn og navnTxt for inneholdet i den variabelen.<br>
@@ -74,7 +74,7 @@ showMessageDialog(null, "Hello, " + navnTxt);
 			Plusstegnet legger sammen tekst hvis du gir skriver en String verdi, som parameteret er.<br>
 			Plusstegnet legger ikke til noe mellomrom, og vil behandle tall som ren tekst.<br>
 			Dette vil si at 2 + 5 i en String vil gi verdien 25, ikke 7, med mindre du skriver (2 + 7).<br>
-			Variabeler, som navnTxt, skal vi som sagt ikke legge hermetegn rundt,<br>
+			Variabler, som navnTxt, skal vi som sagt ikke legge hermetegn rundt,<br>
 			siden det er et navn som refererer til en verdi med hermetegn inkludert.<br><br>
 
 			Nå burde programmet se slik ut:</p>
@@ -94,7 +94,7 @@ public class HelloWorld {
 
 }
 </pre></div>
-			<p>Hvis du kjører programmet nå, burde det spør det om navn og hilse deg.</p>
+			<p>Hvis du kjører programmet nå, burde det spørre deg om navn og hilse deg.</p>
 	</div>
 	<div class="bottom_menu">
   		<div class="bottom_menu_element"><a href="EnkelInteraksjon.html">Forrige Eksempel</a></div>

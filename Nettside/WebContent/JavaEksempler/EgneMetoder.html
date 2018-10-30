@@ -17,7 +17,7 @@
 		<p>Vi har allerede lagd en del løkker som lar deg gjøre noe flere ganger, men hva om du vil noe på et helt vilkårlig<br>
 			tidspunkt? Vi har allerede brukt metoder fra forskjellige bibliotek som lar oss gjøre dette.<br>
 			Hvordan lager vi våre helt egne metoder? Først skal vi lage en metode innenfor samme klasse(fil).<br>
-			Vi lager et skjellet. Nå har vi allerede en metode(main), men vi vil lage en til metode.<br>
+			Vi lager et skjelett. Nå har vi allerede en metode(main), men vi vil lage &egrave;n til metode.<br>
 			Etter slutten av main metoden skriver vi denne metoden:</p>
 <div class=code><pre>
 public static void internMetode() {
@@ -41,32 +41,32 @@ internMetode();
 			Lag en klasse kalt EksterneMetoder uten main i samme pakke.<br>
 			Som sagt kjøres main automatisk, vi trenger ikke dette hvis vi har en metode som skal kalles fra en annen fil.<br>
 			Vi lager en metode eksternPrinting() på samme måte som siste metode.<br>
-			Vi gir også denne en linje som printer ut konfirmasjon.<br>
-			Nå husker du kanskje at vi må kalle denne metoden fra main for at den skal kjøre, men det er litt anderledes nå.<br>
+			Vi gir også denne en linje som printer ut bekreftelse.<br>
+			Nå husker du kanskje at vi må kalle denne metoden fra main for at den skal kjøre, men det er litt annerledes nå.<br>
 			Den er i en annen fil, det vil si at vi må spesifisere filnavnet til klassen som inneholder metoden:</p>
 <div class=code><pre>
 EksterneMetoder.eksternPrinting();
 </pre></div>
 		<p>Når vi kalte internMetode() er det praktisk talt en forkortelse av KallMetoder.internMetode(),<br>
 			det at den er i den samme klassen blir antatt, og gjør at man ikke trenger å skrive like mye.<br>
-			Hvis du kjører klassen med main nå burde begge metodene vi har laget bli kjørt og gi konfirmasjon om det.<br>
+			Hvis du kjører klassen med main nå burde begge metodene vi har laget bli kjørt og gi bekreftelse om det.<br>
 			Dette er kanskje litt interessant, men vi returnerer framdeles ikke en verdi som vi kan jobbe videre med, <br>
-			slik som parseInt() eller showInputDialog(). Vi lager en ny metode i EksterneMetoder, men med et litt anderledes utseende:</p>
+			slik som parseInt() eller showInputDialog(). Vi lager en ny metode i EksterneMetoder, men med et litt annerledes utseende:</p>
 <div class=code><pre>
 public static int oppHoy(int num, int potens) {
 
 
 }
 </pre></div>
-		<p>Nå vil du først har en feil, men ignorer det før øyeblikket.<br>
+		<p>Nå vil du først ha en feil, men ignorer det for øyeblikket.<br>
 			Først og fremst har vi int istedenfor void, hva betyr dette?<br>
-			Dette er typen verdi som funksjonen sender tilbake.<br>
+			Dette er hvilken type verdi som funksjonen sender tilbake.<br>
 			Det er noe som gjøres med alle metoder som du kan sette en variabel til å være lik,<br>
 			som metoder i Math. Vi lager også to int variabler, separert med et komma. Dette er parameterne vi gir når vi kaller funksjonen.<br>
-			Akuratt som når vi gir et parameter til en annen metode.<br> 
+			Akkurat som når vi gir et parameter til en annen metode.<br> 
 			Verdien vi setter inn når vi kaller den blir kopiert inn i disse nye variablene.<br>
 			Disse variablene kan så arbeides med som vanlig innenfor metoden. <br>
-			La oss bruke de nå til å gi resultatet vi ønsker når vi kaller funksjonen:</p>
+			La oss nå bruke dem til å gi resultatet vi ønsker når vi kaller funksjonen:</p>
 <div class=code><pre>
 int origNum = num;
 
@@ -81,14 +81,14 @@ return num;
 		<p>Vi setter i til 1 her siden tallet allerede er ganget med seg selv 1 gang.<br>
 			Vi vil så gange med det originale tallet så mange ganger som potensen.<br>
 			Dette returnerer vi, det er denne verdien som gis tilbake når funksjonen blir kalt.<br>
-			Den må også være typen int siden vi lagde metoden som en public static int.<br><br>
+			Den må også være av typen int siden vi lagde metoden som en public static int.<br><br>
 
 			La oss kalle denne metoden fra main:</p>
 <div class=code><pre>
 System.out.println(EksterneMetoder.oppHoy(5, 3));
 </pre></div>
 		<p>Variabelen num blir gitt verdien 5, og potens blir gitt verdien 3. 125 vil bli returnert fra metoden.<br>
-			Nå kan vi ikke ha en negativt potens, eller noe som ikke er et heltall som potens, men vi kan allerede se likheten mellom dette og Math.pow() metoden.</p>
+			Nå kan vi ikke ha en negativ potens, eller noe som ikke er et heltall som potens, men vi kan allerede se likheten mellom dette og Math.pow() metoden.</p>
 	</div>
 	<div class="bottom_menu">
   		<div class="bottom_menu_element"><a href="Tabeller.html">Forrige Eksempel</a></div>

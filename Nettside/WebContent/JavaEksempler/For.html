@@ -19,7 +19,7 @@
 			La oss si at vi vil lage et program som skriver et antall tegn.<br>
 			Vi kan jo skrive alle tegnene, men hva om vi vil ha et veldig høyt antall?<br>
 			Hva om vi vil endre tegnet vi skriver ut?<br>
-			Her kan vi bruke en for-løkke. La oss lage et enkelt skjellet. Du burde generelt unngå å bruke æ, ø, eller å i koden din.</p>
+			Her kan vi bruke en for-løkke. La oss lage et enkelt skjelett. Du burde generelt unngå å bruke æ, ø, eller å i koden din.</p>
 <div class=code><pre>
 package pakke;
 
@@ -52,14 +52,14 @@ for (int i = 1; i &lt;= antallTegn; i++){
 		<p>for-løkker bruker som sagt en tellerverdi, i, som vi deklarerer og gir verdi i første del av for-løkken. Dette vil bare skje en gang.<br>
 			Vi sier "i &lt;= antallTegn", denne midterste delen fungerer som en if-løkke, og spør om i er mindre eller lik antallTegn.<br>
 			Om den midterste delen er sann går vi inn i løkken og utfører all koden den inneholder.<br>
-			Til slutt, etter koden i løkken er utført, vil vi gi si i++. Vi øker i med 1 siden vi gikk gjennom løkken.<br>
+			Til slutt, etter koden i løkken er utført, vil vi skrive i++. Vi øker i med 1 siden vi gikk gjennom løkken &egrave;n gang.<br>
 			Etter dette vil vi gå tilbake til toppen av løkken og sjekke den midterste if-delen av løkken.<br>
 			Vi går gjennom koden en gang til hvis if-delen fortsatt er sann.<br>
 			Hvis vi hadde brukt denne løkken nå ville den ha gått gjennom innholdet 7 ganger.<br>
 			i settes først til 1, så går vi gjennom koden en gang, så legges det 1 til i, i er lik to.<br>
 			Når vi har gått gjennom løkken 6 ganger vil i være 7.<br>
 			Nå vil ikke i være mindre enn 7(verdien til antallTegn), men i er fortsatt lik antallTegn.<br>
-			Derfor vil vi gå gjennom løkken en gang til og, i blir øket til 8, og oppfyller ikke lenger if-delen av løkken.<br>
+			Derfor vil vi gå gjennom løkken en gang til, og i blir økt til 8, og oppfyller ikke lenger if-delen av løkken.<br>
 			Da vil vi ikke gå inn i løkken igjen, men hoppe over den og fortsette med å utføre resten av koden.<br><br>
 
 			La oss skrive noe med løkken vi har satt opp nå.<br>
@@ -90,7 +90,7 @@ for (int j = 1; j &lt;= antallLinjer; j++){
 	
 }
 </pre></div>
-		<p>Hvis du kjører dette vil den tideliggere linjen bli skrevet flere ganger, like mange ganger som tallet antallLinjer.<br>
+		<p>Hvis du kjører dette vil den tidligere linjen bli skrevet flere ganger, like mange ganger som tallet antallLinjer.<br>
 			For hver gang vi går gjennom den ytterste løkken vil vi stoppe ved den innerste løkken og utføre den 7 ganger før vi fortsetter og går til neste linje.</p>
 	</div>
 	<div class="bottom_menu">

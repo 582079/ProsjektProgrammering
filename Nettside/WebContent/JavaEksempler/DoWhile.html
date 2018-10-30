@@ -13,8 +13,8 @@
 	</div>
 	<div class=container>
 		<h1>DoWhile</h1>
-		<p>Dette blir et litt mer komplisert eksempel, men hvis du bare vil vite om selve løkken kommer den tidelig.<br>
-			Vi starter med et skjellet og importerer java.lang.Integer.* og javax.swing.JOptionPane.*.<br>
+		<p>Dette blir et litt mer komplisert eksempel, men hvis du bare vil vite om selve løkken kommer den tidlig.<br>
+			Vi starter med et skjelett og importerer java.lang.Integer.* og javax.swing.JOptionPane.*.<br>
 			Vi skal veksle penger for et produkt verdt 200 kr.<br>
 			Det "do while"-løkken vil gjøre her er å sjekke om verdien gitt er gyldig.<br>
 			Først starter vi med noen variabler.</p>
@@ -39,11 +39,11 @@ do {
 } while(!gyldigAntall)
 </pre></div>
 		<p>I motsetning til en vanlig while-løkke, står while og sannhetsverdien på slutten av parentesene.<br>
-			Dette er siden while sjekker om det er et gyldig antall etter vi har kjørt koden.<br>
+			Dette er fordi while sjekker om det er et gyldig antall etter vi har kjørt koden.<br>
 			Det vil si at vi alltid går gjennom løkken minst en gang.<br>
-			Vi er også interisserte i å sjekke om antallet er gyldig først etter vi har fått en verdi, hvis den er det er det ikke noe mer som vi trenger å spør etter.<br><br>
+			Vi er også interesserte i å sjekke om antallet er gyldig først etter vi har fått en verdi, hvis den er det er det ikke noe mer som vi trenger å spørre etter.<br><br>
 
-			Vi gir antallKr en verdi som blir omgjort fra Stringen vi får fra showInputDialog().<br>
+			Vi gir antallKr en verdi som blir omgjort fra strengen vi får fra showInputDialog().<br>
 			Vi gir også en melding som forklarer hvorfor brukeren må gi en ny verdi, om de skulle skrive en feil verdi først.</p>
 <div class=code><pre>
 antallKr = parseInt(showInputDialog("Gi et antall kr over " + pris + " kr: "));
@@ -76,9 +76,9 @@ for(int i = krEnheter.length-1; i&gt;=0; i--) {
 }
 </pre></div>
 		<p>Merk to ting:<br>
-			Vi sier at indeksen er en mindre enn lengden. Dette er siden den høyeste indeksen i en tabell er en mindre enn lengden.<br>
-			Vi begynner også fra den høyeste indeksen og går ned null.<br>
-			Dette er siden vi vil veksle de største krone-enhetene først, ellers ville vi bare gi enkroninger.<br><br>
+			Vi sier at indeksen er &egrave;n mindre enn lengden. Dette er fordi den høyeste indeksen i en tabell er &egrave;n mindre enn lengden.<br>
+			Vi begynner også fra den høyeste indeksen og går ned til null.<br>
+			Dette er fordi vi vil veksle de største krone-enhetene først, ellers ville vi bare gi kronestykker.<br><br>
 
 			Vi spør om resten delt på den minste krone-enheten hittil er større enn null:</p>
 <div class=code><pre>
@@ -86,7 +86,7 @@ if(rest / krEnheter[i] &gt; 0) {
 
 }
 </pre></div>
-		<p>Husk at dette er heltallsdivisjon, så med mindre resten er større enn minst en ganger krone-enheten, vil dette ikke være sant.<br>
+		<p>Husk at dette er heltallsdivisjon, så med mindre resten er større enn minst &egrave;n ganger krone-enheten, vil dette ikke være sant.<br>
 			Hvis det er sant utfører vi denne koden:</p>
 <div class=code><pre>
 antallEnheter[i] = rest / krEnheter[i];

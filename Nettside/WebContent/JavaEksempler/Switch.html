@@ -16,10 +16,10 @@
 		<p>Nå skal vi bruke noe som kalles "switch".<br>
 			Det er litt som if og else, men mer konkret.<br>
 			Når vi sier if og else sier vi ofte at noe er over en verdi eller under en verdi.<br>
-			Når vi bruker switch vil vi si at hva som skal skje med noe som er i en helt bestemt tilstand, <br>
+			Når vi bruker switch vil vi si hva som skal skje med noe som er i en helt bestemt tilstand, <br>
 			slik som en lysbryter.<br>
-			I dette eksempelet skal vi late som om vi har en bomstasjon og skal sette en pris for forskjellige fartøy.<br>
-			Først begynner vi med et enkelt skjellet. Vi vil også importere javax.swing.JOptionPane.*;<br>
+			I dette eksempelet skal vi late som om vi har en bomstasjon og skal sette en pris for forskjellige kjøretøy.<br>
+			Først begynner vi med et enkelt skjelett. Vi vil også importere javax.swing.JOptionPane.*;<br>
 			Vi lager en variabel for å holde på prisen:</p>
 <div class=code><pre>
 int pris = 0;
@@ -32,7 +32,7 @@ String transport = showInputDialog("Motorsykkel, bil, eller lastebil?");
 <div class=code><pre>
 transport.toLowerCase();
 </pre></div>
-		<p>Nå skal vi bruke switch, strukturen vil se litt anderledes ut enn vanlig:</p>
+		<p>Nå skal vi bruke switch, strukturen vil se litt annerledes ut enn vanlig:</p>
 <div class=code><pre>
 switch(transport) {
 	case "motorsykkel": pris += 0; break;
@@ -42,10 +42,10 @@ switch(transport) {
 </pre></div>
 		<p>I dette tilfellet "switcher" vi mellom tilstandene til transport, derfor vil transport være variabelen i parentes.<br>
 			Vi har flere linjer som begynner med case, disse linjene er de forskjellige<br>
-			tilstandene som transport kanvære i, også sier vi hva som skjer hvis de er den tilstanden.<br> 
-			Det rett etter case er tilstanden, og det etter kolon er det som skjer hvis<br>
+			tilstandene som transport kan være i, også sier vi hva som skjer hvis de er i den tilstanden.<br> 
+			Det som står rett etter case er tilstanden, og det etter kolon er det som skjer hvis<br>
 			transport er i denne tilstanden. Etter semikolon har vi en ekstra del, break. Vi sier break siden vi vil brekke oss ut hvis vi kommer til dette punktet.<br>
-			Hvorfor det? Det er nemlig siden vi ikke trenger å sjekke noe mer når vi først vet hvilke tilstand vi er i og har handlet basert på det.<br>
+			Hvorfor det? Det er nemlig siden vi ikke trenger å sjekke noe mer når vi først vet hvilken tilstand vi er i og har handlet basert på det.<br>
 			Det ville bare vært bortkastet tid å fortsette å lete med mindre du har et spesielt tilfelle<br>
 			hvor tilstanden skal endre seg når den er i en viss tilstand. Dette er usannsynlig.<br><br>
 
@@ -53,7 +53,7 @@ switch(transport) {
 <div class=code><pre>
 System.out.println("Prisen er: " + pris); 
 </pre></div>
-		<p>For å gi et annet eksempel på hvor dette hadde vært bruksomt, kunne du brukt switch til å bevege en karakter i et spill en viss retning basert på hvilke knapp som blir presset.</p>
+		<p>For å gi et annet eksempel på hvor dette hadde vært nyttig å bruke, kunne du brukt switch til å bevege en karakter i et spill en viss retning basert på hvilken knapp som blir trykket på.</p>
 	</div>
 	<div class="bottom_menu">
   		<div class="bottom_menu_element"><a href="For.html">Forrige Eksempel</a></div>

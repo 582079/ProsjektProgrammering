@@ -14,10 +14,10 @@
 	<div class=container>
 		<h1>If</h1>
 		<p>Til nå har vi laget programmer som følger de samme instruksjonene hver gang.<br>
-			Programmet som leser inn et navn, og bruker det kan få forskjellig informasjon, men det vil alltid bruke det på samme måte.<br>
+			Programmet som leser inn et navn, og bruker det, kan få forskjellig informasjon, men det vil alltid bruke det på samme måte.<br>
 			Hvis vi ser på noe annet, som innlogging, vet vi at det er tilfeller hvor vi må handle forskjellig basert på forskjellige resultater.<br>
 			Dette gjør vi med if. Som et eksempel kan vi lage et system hvor du skal gjette et tall.<br>
-			La oss lage et skjellet, importere JOptionPane og lese inn en verdi vi kaller tallTxt:</p>
+			La oss lage et skjelett, importere JOptionPane og lese inn en verdi vi kaller tallTxt:</p>
 <div class=code><pre>
 package pakke;
 
@@ -42,7 +42,7 @@ import static java.lang.Interger.*;
 <div class=code><pre>
 int tall = parseInt(tallTxt);
 </pre></div>
-		<p>Dersom du det er oversiktlig nokk for deg kan du også forkorte tallTxt og tall til:</p>
+		<p>Dersom du synes det er oversiktlig nok for deg kan du også forkorte tallTxt og tall til:</p>
 <div class=code><pre>
 int tall = parseInt(showInputDialog("Gjett tallet:"));
 </pre></div>
@@ -60,7 +60,7 @@ if(tallTxt == hemmeligTall){
 			Her spør vi om tallTxt == hemmeligTall, men hvorfor bruker vi to er-lik-tegn?<br>
 			Grunnen til at vi gjør det er at vi skiller mellom deklarasjon og sammenligning.<br>
 			Vi sier ikke at tallTxt er lik hemmeligTall, vi spør om tallTxt er lik hemmeligTall.<br>
-			Nå sier vi hva som skal skjer om vi gjetter riktig.<br>
+			Nå sier vi hva som skal skje om vi gjetter riktig.<br>
 			Mellom parentesene til if kan vi bare skrive en kort tilbakemelding med showMessageDialog():</p>
 <div class=code><pre>
 if(tallTxt == hemmeligTall){
@@ -95,7 +95,7 @@ public class GjettTall {
 }
 </pre></div>
 		<p>Hvis du kjører dette programmet vil et riktig resultat bli anerkjent, mens et feil resultat vil bli ignorert.<br>
-			Det er her "else if" kommer inn. Vi kan skrive en liten "else if" som spør tallet er større enn det hemmelige tallet.<br>
+			Det er her "else if" kommer inn. Vi kan skrive en liten "else if" som spør om tallet er større enn det hemmelige tallet.<br>
 			Denne burde komme etter slutten av if, dvs. etter høyre krøllparentes.</p>
 <div class=code><pre>
 else if(tall &gt; hemmeligTall){
@@ -116,8 +116,8 @@ else if (tall &lt; hemmeligTall) {
 	
 }
 </pre></div>
-		<p>Nå vil du ha et program som lar deg gjette et tall og gir tilbakemelding om det enten er for rett, for stort eller for lite.<br>
-			Istedenfor de to "else if" kunne du også brukt else.<br>
+		<p>Nå vil du ha et program som lar deg gjette et tall og gir tilbakemelding om det enten er rett, for stort eller for lite.<br>
+			Istedenfor den siste "else if" kunne du også brukt else.<br>
 			else sier bare hva som skal skje i alle andre tilfeller, og skrives etter alle if og "else if" for å dekke resten av tilfellene.</p>
 	</div>
 	<div class="bottom_menu">

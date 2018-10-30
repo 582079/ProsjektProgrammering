@@ -2,7 +2,7 @@
 <html>
 <head lang="nb">
 <meta charset="utf-8">
-<title>Flerdimensjonelle Tabeller</title>
+<title>Flerdimensjonale Tabeller</title>
 <link rel="stylesheet" href="JavaCodeStyle.css">
 </head>
 <body>
@@ -12,11 +12,11 @@
   		<div class="menu_element"><a href="../ProsjektBeskrivelse.html">Om Prosjektet</a></div>
 	</div>
 	<div class=container>
-		<h1>Flerdimensjonelle Tabeller</h1>
+		<h1>Flerdimensjonale Tabeller</h1>
 		<p>Tabeller kan ha flere dimensjoner, ikke bare en.<br>
 			Dette er lett gjort ved å legge til en ekstra firkantparentes.<br>
 			I dette eksempelet skal vi se hvordan du kunne bygd opp en enkel kalender som tar inn en time, dag og hendelse.<br>
-			Vi begynner med et enkelt skjellet og importerer javax.swing.JOptionPane.* og java.lang.Integer.*.<br>
+			Vi begynner med et enkelt skjelett og importerer javax.swing.JOptionPane.* og java.lang.Integer.*.<br>
 			Vi vil også lage en variabel i klassen, før main metoden, dette er slik at den skal være tilgjengelig for flere metoder:</p>
 <div class=code><pre>
 private static String[][] kalender = new String[31][24];
@@ -66,7 +66,7 @@ kalender[dag - 1][time] = hendelse;
 <div class=code><pre>
 System.out.println(kalender[dag-1][time] + " klokken 12 den 30.");
 </pre></div>
-		<p>kall metoden i main:</p>
+		<p>Kall metoden i main:</p>
 <div class=code><pre>
 lagHendelse();
 </pre></div>
@@ -75,14 +75,14 @@ lagHendelse();
 12/30/test
 </pre></div>
 		<p>I dette eksempelet kan man lett legge til flere dimensjoner som minutter, uker, måneder, år.<br>
-			Man kan også sette en start og slutt dato og fylle alle plasser mellom med en løkke for mer nøyanse.<br>
+			Man kan også sette en startdato og sluttdato og fylle alle plasser mellom med en løkke.<br>
 			Noe som kunne vært praktisk hadde vært å lagre og hente denne kalendertabellen.<br>
 			Dette skal vi bruke til å utvide kalenderen i eksempelet for filbehandling.</p>
 	</div>
 	<div class="bottom_menu">
   		<div class="bottom_menu_element"><a href="Objekter.html">Forrige Eksempel</a></div>
   		<div class="bottom_menu_element"><a href="JavaForside.html">Alle Eksempler</a></div>
-  		<div class="bottom_menu_element"><a href="JavaForside.html">Neste Eksempel</a></div>
+  		<div class="bottom_menu_element"><a href="Kalender.html">Neste Eksempel</a></div>
 	</div>
 </body>
 </html>

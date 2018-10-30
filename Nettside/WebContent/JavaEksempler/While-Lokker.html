@@ -15,11 +15,11 @@
 		<h1>While-løkker</h1>
 		<p>En while-løkke fungerer litt som en for-løkke.<br>
 			Den vil sjekke om noe er sant, utføre koden om det er sant, gå tilbake for å sjekke sannhetsverdien igjen, inntil den får et usant resultat.<br>
-			Det som er anderledes er at while løkken ikke inkluderer en tellerverdi.<br>
+			Det som er annerledes er at while løkken ikke inkluderer en tellerverdi.<br>
 			En while løkke har derfor ikke et like klart sluttpunkt.<br>
 			Dette kan være praktisk hvis vi ikke vet hvor mange ganger vi skal gå gjennom en løkke.<br>
 			Et eksempel på dette kan være om en bruker skal legge til linjer til en liste, og selv skal bestemme når de vil slutte.<br>
-			Vi lager et slik eksempel. Begynn med et skjellet og importer biblioteket JOptionPane.</p>
+			Vi lager et slik eksempel. Begynn med et skjelett og importer biblioteket JOptionPane.</p>
 <div class=code><pre>
 package pakke;
 
@@ -38,11 +38,11 @@ public class WhileLokker {
 StringBuilder liste = new StringBuilder();
 boolean ferdig = false;
 </pre></div>
-		<p>"liste" er spesiel siden det er en ny type variabel, StringBuilder.<br>
-			Navnet forklarer hva variabelen gjør ganske bra, den bygger opp en String verdi.<br>
+		<p>"liste" er spesiell siden det er en ny type variabel, StringBuilder.<br>
+			Navnet forklarer ganske bra hva variabelen gjør, den bygger opp en String verdi.<br>
 			StringBuilder har en metode append(), som lar deg legge til hva som helst, forskjellige typer blir konvertert til typen String.<br>
 			"ferdig" er også en ny type variabel. Den inneholder en sannhetsverdi, true eller false.<br>
-			Siden if og løkker sjekker sannhetsverdier kan vi gi en variabel som refererer til en sannhetsverdi.<br><br>
+			Siden løkker sjekker sannhetsverdier kan vi gi en variabel som refererer til en sannhetsverdi.<br><br>
 
 			Nå kan vi begynne på while-løkken:</p>
 <div class=code><pre>
@@ -52,13 +52,13 @@ while(!ferdig) {
 		<p>while-løkken ser mye enklere ut enn for-løkken.<br>
 			Det er siden vi ikke teller hvor mange ganger vi har gått gjennom løkken nå.<br>
 			Alt vi vil vite er om vi er ferdige. Om vi ikke er ferdige fortsetter vi.<br>
-			Det er dette while-løkken spør om, !ferdig betyr "ikke ferdig", et utropstegn den motsatte sannhetsverdien.<br>
+			Det er dette while-løkken spør om, !ferdig betyr "ikke ferdig", et utropstegn angir den motsatte sannhetsverdien.<br>
 			Det vil si at vi går inn i while-løkken, siden ferdig == false.<br><br>
 
-			Vi vil begynne å spør om linjer til listen nå.<br>
+			Vi vil begynne å spørre om linjer til listen nå.<br>
 			Siden vi skal bruke Stringen vi får til å sjekke om brukeren er ferdig skal vi også nevne det i meldingen som sendes til brukeren.</p>
 <div class=code><pre>
-String nyLinje = showInputDialog("Legg en linje til listen (gi et tomt svar for å slutte):");
+String nyLinje = showInputDialog("Legg en linje til listen (gi en tom linje for å slutte):");
 </pre></div>
 		<p>Vi må huske å teste om de er ferdige før vi legger noe til listen.</p>
 <div class=code><pre>
@@ -68,13 +68,13 @@ if(!nyLinje.isEmpty()){
 }</pre></div>
 		<p>isEmpty() er en String metode som lar deg se om en String er tom(mellomrom telles ikke som tom).<br>
 			Det er vanligvis sant at det ikke er tilfellet at nyLinje er tom(!nyLinje.isEmpty()).<br>
-			Hvis dette er sant legger vi linjen til liste og bruker et spesielt "neste linje" tegn, "\n":</p>
+			Hvis dette er sant legger vi linjen til listen og bruker et spesielt "neste linje" tegn, "\n":</p>
 <div class=code><pre>
 liste.append(nyLinje + "\n");
 </pre></div>
 		<p>Merk at "neste linje" tegnet er innenfor hermetegn og bruker en mer uvanlig omvendt skråstrek.<br><br>
 
-			Hvis det skulle være tilfellet at den nye linjen faktisk er tom, setter vi ferdig variabelen våres til true for å stoppe løkken.</p>
+			Hvis det skulle være tilfellet at den nye linjen faktisk er tom, setter vi ferdig variabelen vår til true for å stoppe løkken.</p>
 <div class=code><pre>
 else {
 
@@ -104,7 +104,7 @@ public class WhileLokker {
 		
 		while(!ferdig) {
 			
-			String nyLinje = showInputDialog("Legg en linje til listen (gi et tomt svar for å slutte):");
+			String nyLinje = showInputDialog("Legg en linje til listen (gi en tom linje for å slutte):");
 			
 			if (!nyLinje.isEmpty()) {
 				

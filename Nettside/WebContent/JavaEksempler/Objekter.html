@@ -16,9 +16,9 @@
 		<p>Java er et objekt-orientert språk. Det finnes en type kalt Object, men det er ikke det i seg selv vi skal fokusere på.<br>
 			Vi skal fokusere på objekter man kan lage selv. Disse objektene vil arve egenskaper fra Object klassen. Det er også innebygde typer som er objekter, som f. eks. tabeller.<br>
 			Hva skal vi lagre i et objekt? Hva du kan lagre i et objekt er ganske fleksibelt. Det vil være en egen klasse, med egne variabler og metoder.<br>
-			Det vil si at de båre kan lagre mange forskjellige typer informasjon, i tillegg til at de kan gjøre mange forskjellige handlinger som vi selv kan definere.<br>
+			Det vil si at de både kan lagre mange forskjellige typer informasjon, i tillegg til at de kan gjøre mange forskjellige handlinger som vi selv kan definere.<br>
 			I dette eksempelet skal vi ha et objekt kalt nettside som holder på informasjon om en nettside og lar oss sammenligne slik informasjon mellom flere nettside objekter.<br>
-			Først lager vi et skjellet for en klasse vi kaller NettsideKlient. Denne vil lage nye Nettside objekter og bruke metodene til de objektene.<br>
+			Først lager vi et skjelett for en klasse vi kaller NettsideKlient. Denne vil lage nye Nettside objekter og bruke metodene til de objektene.<br>
 			Vi skal også lage en Nettside klasse i en annen fil, men denne vil ikke bruke en main metode. Vi trenger også ikke å gjøre klassen "public", og mer privat er generelt bedre, så vi benytter muligheten.</p>
 <div class=code><pre>
 class Nettside {
@@ -31,8 +31,8 @@ private String navn;
 private String URL;
 private String ipAdresse;
 </pre></div>
-		<p>Dette er generel informasjon som hvert Nettside objekt vil inneholde.<br>
-			Nå bruker vi noe kalt en "kontruktør". Den må ha samme navn som klassen og lar deg ta inn parametere når en ny kopi av objektet lages.</p>
+		<p>Dette er generell informasjon som hvert Nettside objekt vil inneholde.<br>
+			Nå bruker vi noe kalt en "konstruktør". Den må ha samme navn som klassen og lar deg ta inn parametere når en ny kopi av objektet lages.</p>
 <div class=code><pre>
 public Nettside(String _navn, String _URL, String _ipAdresse){
 		
@@ -42,7 +42,7 @@ public Nettside(String _navn, String _URL, String _ipAdresse){
 		
 }
 </pre></div>
-		<p>Her vil de private variablene bli satt til argumenter slik at vi kan lage nye objekter som øyblikkelig er meningsfulle.<br>
+		<p>Her vil de private variablene bli satt til argumenter slik at vi kan lage nye objekter som øyeblikkelig er meningsfulle.<br>
 			Vi kan også lage forskjellige versjoner av denne konstruktøren. Det vi gjør nå er å lage en versjon med null argumenter i tilfellet det ikke blir gitt.<br>
 			Dette vil da være standardverdiene:</p>
 <div class=code><pre>
@@ -52,7 +52,7 @@ public Nettside() {
 		
 }
 </pre></div>
-		<p>Her bruker vi også this. "this" er det vi er i, som er Objektet nettside nå. Vi kaller den forrige konstruktøren som tar 3 paremetre og gir 3 standard parametre.<br>
+		<p>Her bruker vi også this. "this" er det vi er i, som er Objektet nettside nå. Vi kaller den forrige konstruktøren som tar 3 parametre og gir 3 standard parametre.<br>
 			Nå skal vi også generere noen metoder, set og get, for variablene vi har. Plasser den blinkende streken som viser hvor du er etter slutten av den siste konstruktøren.<br>
 			Det er her de genererte metodene vil bli plassert. Klikk på Source > Generate getters and setters i topp-baren. Velg alle variablene. Generer.<br><br>
 
@@ -73,7 +73,7 @@ System.out.println(youtube.getNavn());
 </pre></div>
 		<p>For å printe ut innholdet i variabelen navn i Nettside objektet youtube.<br><br>
 
-			La oss lage noen sammenlignings metoder:</p>
+			La oss lage noen metoder for sammenligning:</p>
 <div class=code><pre>
 public boolean likNavn(Nettside annenNettside) {
 		
@@ -130,8 +130,8 @@ public boolean likIP(Nettside annenNettside) {
 }
 </pre></div>
 		<p>Her har vi en sjekk for andre objekter som er lik null siden det ville gitt en feil om vi behandlet de.<br>
-			Du har kanskje lagt merke til at vi ikke bruker en get-metode her for å få tak i variablene til det andre objektet som er paremetret.<br>
-			Dette går hvis paremetret er av samme type, det er sant for annenNettside siden den er av typen Nettside.<br><br>
+			Du har kanskje lagt merke til at vi ikke bruker en get-metode her for å få tak i variablene til det andre objektet som er parametret.<br>
+			Dette går hvis parametret er av samme type, det er sant for annenNettside siden den er av typen Nettside.<br><br>
 
 			Du kan kalle disse metodene fra NettsideKlient slik som dette:</p>
 <div class=code><pre>
