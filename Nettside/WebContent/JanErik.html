@@ -40,24 +40,14 @@
 		<noscript><div id="body"></noscript>
 		<script>
 		$(document).ready(function(){
-			//generer tabell med headerrad
+			
 			var tab = $(document.createElement('table'));
 			var para = $(("#paragrafer"));
 			var parentDiv = $(("#container"));
 			tab.insertBefore(para);
-			//tab.appendTo(parentDiv);
-			//parentDiv.appendTo('.container');
-			//tab.appendTo(parentDiv);
-			//var parentDiv = title.parentNode;
-			//parentDiv.insertBefore(tab, $(document.getElementById("#paragrafer")));
-			//$("#paragrafer").parent(".container").insertBefore(tab, $("#paragrafer"));
-			//insertedNode.appendTo("#container");
-			//$("#paragrafer").parent(".container").prepend(tab);
-			//tab.appendTo("#container");
-			
 			
 			var tr = $(document.createElement('tr')).appendTo(tab);
-			tab.className = "likerTabell";
+			tab.className = "experienceTable";
 			var th1 = $(document.createElement('th'));
 			var th1cont = $(document.createTextNode("Kjent med"));
 			th1.appendTo(tr);
