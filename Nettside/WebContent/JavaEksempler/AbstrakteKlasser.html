@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head lang="nb">
+<meta charset="utf-8">
+<title>Abstrakte Klasser</title>
+<link rel="stylesheet" href="JavaCodeStyle.css">
+</head>
+<body>
+	<div class="menu">
+  		<div class="menu_element"><a href="../om_oss.html">Om Oss</a></div>
+  		<div class="menu_element"><a href="JavaForside.html">Alle Javaeksempler</a></div>
+  		<div class="menu_element"><a href="../WebEksempler/WebForside.html">Alle Webeksempler</a></div>
+  		<div class="menu_element"><a href="../ProsjektBeskrivelse.html">Om Prosjektet</a></div>
+	</div>
+	<div class=container>
+		<h1>Abstrakte Klasser</h1>
+		<p>En abstrakt klasse er et utgangspunkt for andre klasser, her er et enkelt eksempel for frukt:<br></p>
+<div class=code><pre>
+package pakke;
+
+public abstract class Frukt {
+	
+	protected String navn;
+	protected String farge;
+	protected int kiloKalorier;
+	protected double vekt;
+	
+	public Frukt() {
+		
+		this("Tom", "Gjennomsiktig", 0, 0);
+		
+	}
+	
+	public Frukt(String _navn, String _farge, int _kiloKalorier, double _vekt) {
+		
+		navn = _navn;
+		farge = _farge;
+		kiloKalorier = _kiloKalorier;
+		vekt = _vekt;
+		
+	}
+	
+}
+</pre></div>
+		<p>Vi nevner i begynnelsen at klassen frukt er abstrakt("abstract"). Dette vil si at klassen i seg selv ikke skal brukes, men være grunnlaget for en annen klasse.<br>
+			Det samme kan vi også gjøre med funksjoner i klassen, det kommer vi til senere.<br>
+			Her bruker vi protected, det vil si at vi gir tilgang til variablene for subklassene, klassene som skal basere seg på, og utvide, den abstrakte klassen.<br>
+			Dette vil vi gjøre fordi vi vil bruke variablene i subklassene som skal basere seg på denne abstrakte klassen.<br>
+			Vi lager noen variabler for generelle verdier for frukt, som alle frukter vil ha.<br>
+			Vi lager en standard konstruktør og konstruktøren vi kan sette verdier inn i.<br>
+			Vi lager en ny klasse. Jeg velger å bruke druer her fordi de har noen verdier ikke alle frukter har.</p>
+<div class=code><pre>
+package pakke;
+
+public class Druer extends Frukt {
+	
+	private boolean stein;
+	private int antall;
+	
+	public Druer() {
+		
+		super();
+		
+	}
+	
+	public Druer(String _navn, String _farge, int _kiloKalorier, double _vekt, boolean _stein, int _antall) {
+		
+		navn = _navn;
+		farge = _farge;
+		kiloKalorier = _kiloKalorier;
+		vekt = _vekt;
+		stein = _stein;
+		antall = _antall;
+		
+	}
+
+}
+</pre></div>
+		<p>Her ser du at Druer utvider("extends") Frukt, den abstrakte klassen, som vil være superklassen til Druer.<br>
+			Vi ser at vi slipper å lage alle variablene som alle frukter vil ha i felles uansett, vi lager bare variabler for unike egenskaper.<br>
+			Vi slipper også å bruke protected her, fordi det bare er superklassen som vil dele variabler med subklassen, ikke omvendt.<br>
+			Vi skriver også super() her. Som sagt er Frukt superklassen, så super() kaller konstruktøren til Frukt.<br>
+			I den neste konstruktøren kan vi også se at vi har tilgang til felles variablene for frukt.<br>
+			Som sagt er dette på grunn av at vi satte de til protected i Frukt. Vi kan behandle de som om vi hadde laget de i denne klassen direkte.<br>
+			Her er et til eksempel på en mulig subklasse av Frukt:</p>
+<div class=code><pre>
+package pakke;
+
+public class Banan extends Frukt {
+	
+	private boolean flekker, iKlase;
+	
+	public Banan() {
+		
+		super();
+		
+	}
+	
+	public Banan(String _navn, String _farge, int _kiloKalorier, double _vekt, boolean _flekker, boolean _iKlase) {
+		
+		navn = _navn;
+		farge = _farge;
+		kiloKalorier = _kiloKalorier;
+		vekt = _vekt;
+		flekker = _flekker;
+		iKlase = _iKlase;
+		
+	}
+
+}
+</pre></div>
+		<p>Her bruker vi bananer, som har noen andre egenskaper.<br>
+			Nå kan vi både ha klaser av druer og bananer, men vi setter ikke dette som en variabel i Frukt siden det ikke er relevant for alle frukter.<br><br>
+
+			Nå vil vi også prøver å lage en abstrakt metode for å sette navn i Frukt:</p>
+<div class=code><pre>
+public abstract void spis();
+</pre></div>
+		<p>Som du ser lager vi ikke en metode som gjør noe, det er en metode som subklassene må implementere.<br>
+			Vi sier at alle subklassene av Frukt må ha en metode for å la deg spise frukten.<br><br>
+
+			I Druer ville du lagd en spis-metode akkurat som en vanlig metode, som plukker druer og kaster de inn i munnen.<br>
+			I Banan ville du ha laget en spis-metode, men du ville spist den på en annerledes måte.<br>
+			Derfor vil vi lage en abstrakt metode, istedenfor en vanlig metode i superklassen, vi vil ha metoden i alle subklasser, men det involverer en annen fremgangsmåte.<br>
+
+			Når vi har en superklasse, Frukt, kan si at Druer og Banan er Frukt, altså vil dette fungere:</p>
+<div class=code><pre>
+Frukt[] fruktKurv = new Frukt[10];
+fruktKurv[0] = new Druer("druer", "lilla", 3, 5, false, 1);
+fruktKurv[1] = new Banan ("banan", "gul", 100, 115, true, false);
+</pre></div>
+		<p>Hvis du vil behandle en Frukt som en banan må du "caste" banan, dvs. eksplisitt si at det er en banan:</p>
+<div class=code><pre>
+Banan bumerangBanan = (Banan)fruktKurv[1];
+</pre></div>
+		<p>For å vite om frukten du jobber med faktisk er en Frukt kan du bruke instaceof:</p>
+<div class=code><pre>
+Tomat nyTomat = new Tomat("tomat", "rød", 22, 120);
+boolean erTomatFrukt = nyTomat instanceof Frukt;
+</pre></div>
+		<p>Du kan også bruke instanceof for å sjekke om noe er en Integer(int), String, boolean, osv.</p>
+	</div>
+	<div class="bottom_menu">
+  		<div class="bottom_menu_element"><a href="FeilHandtering.html">Forrige Eksempel</a></div>
+  		<div class="bottom_menu_element"><a href="JavaForside.html">Alle Javaeksempler</a></div>
+  		<div class="bottom_menu_element"><a href="JavaForside.html">Neste Eksempel</a></div>
+	</div>
+</body>
+</html>
