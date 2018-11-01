@@ -65,7 +65,7 @@ p, h1, h2, h3, h4, h5, h6, a, strong, pre, title{
 
 .container_gruppebilde img {
 	
-	padding-top:10px;
+	padding-top:0px;
 	padding-right:10px;
 	margin-left:auto;
 	margin-right:auto;
@@ -78,7 +78,7 @@ p, h1, h2, h3, h4, h5, h6, a, strong, pre, title{
 
 .bildetekst {
     position: absolute;
-    top: 26px;
+    top: 16px;
     left: 16px;
     font-size: 18px;
     color: white;
