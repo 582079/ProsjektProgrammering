@@ -122,6 +122,7 @@ html{
 
 #sluttrapport_btn {
 	
+	position:fixed;
 	bottom:85px;
 	
 }
