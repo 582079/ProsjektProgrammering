@@ -17,7 +17,7 @@ html{
 
 .menu_element:hover {
 	
-	backround-color:relative;
+	background-color:relative;
 	animation-name:menu_hover_ani;
 	animation-duration:1s;
 	animation-iteration-count:infinite;
@@ -95,7 +95,7 @@ html{
 
 .download:hover {
 	
-	backround-color:relative;
+	background-color:relative;
 	animation-name:menu_hover_ani;
 	animation-duration:1s;
 	animation-iteration-count:infinite;
@@ -153,7 +153,8 @@ h3 {
 	border-collapse: collapse;
 	width:450px;
 	color:#222;
-	cellspacing:0px;
+	border-spacing:0px;
+	
 }
 
 tr{
