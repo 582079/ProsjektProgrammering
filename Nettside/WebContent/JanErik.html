@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <title>Jan Erik</title>
 <link rel="stylesheet" href="JEStyleSheet.css">
-<style>div#body{display:none;}</style>
 <script src="jquery-3.3.1.js"></script>
 
 </head>
@@ -22,7 +21,7 @@
 		<img src="Janerik.jpeg" width=250 height=300 alt="Jan Erik">
 	
 		<h2 id="title">Erfaring i programmering:</h2>
-		<noscript><table id="experienceTable">
+		<noscript><table class="experienceTable">
  			<tr>
  				<th><p>Kjent med</p></th>
 				<th><p>Ny</p></th>
@@ -37,7 +36,7 @@
 			</tr>
 		</table>
 		</noscript>
-		<noscript><div id="body"></noscript>
+		<!-- <noscript><div id="body"></noscript> -->
 		<script>
 		$(document).ready(function(){
 			
@@ -45,9 +44,9 @@
 			var para = $(("#paragrafer"));
 			var parentDiv = $(("#container"));
 			tab.insertBefore(para);
+			tab.className = "experienceTable";
 			
 			var tr = $(document.createElement('tr')).appendTo(tab);
-			tab.className = "experienceTable";
 			var th1 = $(document.createElement('th'));
 			var th1cont = $(document.createTextNode("Kjent med"));
 			th1.appendTo(tr);
@@ -82,7 +81,7 @@
 		});
 		
 		</script>
-		<noscript></div></noscript>
+		<!-- <noscript></div></noscript> -->
 		
 		<div class="paragrafer" id="paragrafer">
 			<strong>Opplevelse med språkene:</strong>
