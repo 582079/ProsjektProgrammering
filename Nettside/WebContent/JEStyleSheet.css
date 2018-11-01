@@ -73,9 +73,17 @@ html{
 	
 }
 
+#prosjektbeskrivelse{
+	
+	width:73%;
+	
+}
+
 .download{
 	
-	position:relative;
+	position:fixed;
+	right:10px;
+	float:right;
 	bottom:10px;
 	width:15vw;
 	min-width:225px;
